@@ -1,2 +1,7 @@
 ^rexams\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+^CODE_OF_CONDUCT\.md$
+^\.travis\.yml$
+^codecov\.yml$
+^\.github$
