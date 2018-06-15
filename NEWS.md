@@ -1,3 +1,9 @@
+# rexams 0.0.2
+
+* First three question for tdp1718 with first check funcitons.
+* Reshaped and reformatted the `death_ita` data (all csv and rda versions) and
+  updated the corresponding documentation.
+
 # rexams 0.0.1
 
 * Added `inst/exams/tdp1718/tdp1718.R` file as the template for the "Tecniche

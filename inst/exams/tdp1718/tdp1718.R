@@ -13,12 +13,13 @@
 #'   error    = TRUE,
 #'   collapse = TRUE
 #' )
+#' if (!require("rexams") || packageVersion('rexams') < '0.0.1') {
+#'   devtools::install_github(DCTV-UBESP/rexams, ref = 'tdp1718')
+#'   library(rexams)
+#' }
 #' ```
 #'<!-- =================== FINE DELLA PARTE DA IGNORARE===================== -->
 #'<!-- ===================================================================== -->
-
-
-
 
 
 
@@ -123,30 +124,109 @@
 #' # ESAME
 #'
 #'<!-- ===================================================================== -->
-
-
-
-
 #'<!-- ===================================================================== -->
 #' ## Domanda 1 (punteggio = 1, propedeutica: si)
 #'
+#' Per prima cosa è necessario importare la cartella di lavoro
+#' (Working Directory).
+#'
+#' Nel caso si usi del codice per eseguire questa operazione lo si scriva qui
+#' sotto nello spazio senza i caratteri di commento iniziali `#'`
+#'
+#' > NOTA: non è necessario impostare la cartella di lavoro tramite codice,
+#'         è possibile infatti farlo anche "punta e clicca" da RStudio.
+#'         Eseguire lésercizio come si preferisce.
+#'
+
+
+
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta impostata la cartella di lavoro correttamente, eseguire la seguente
+#' istruzione (selezionarla e premere `CTRL + INVIO`). Quanto visualizzato
+#' nella console dovrà corrispondere allíndirizzo richiesto. Dopodiché, passare
+#' alla domanda seguente.
+#'
+tdp1718_check_1()
 #'<!-- ===================================================================== -->
 
 
 
 
+
+
+
+
+
+
+#'<!-- ===================================================================== -->
 #'<!-- ===================================================================== -->
 #' ## Domanda 2 (punteggio = 1, propedeutica: si)
 #'
-#'<!-- ===================================================================== -->
-
-
-
-
-#'<!-- ===================================================================== -->
-#' ## Domanda 3 (punteggio = 1, propedeutica: si)
+#' A questo punto si possono caricare i dati.
+#'
+#' Completare il codice seguente per importare il dataset richiesto in un
+#' dataframe dal nome `death_ita`.
+#'
+#' ESEMPIO:
+#'
+#' death_ita <- ...........
 #'
 #'<!-- ===================================================================== -->
+
+
+
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_2()
+#'<!-- ===================================================================== -->
+
+
+
+
+
+
+
+
+
+
+#'<!-- ===================================================================== -->
+#' ## Domanda 3 (punteggio = 1, propedeutica: no)
+#'
+#'  Iniziare a investigare la abse di dati ricavando il numero di righe e
+#'  colonne, e il nome delle colonne.
+#'
+#' Scrivere, nello spazio non commentato, il codice per trovare le informazioni
+#' richieste, assegnandole rispettivamente alle variabili: `numero_righe`,
+#' `numero_colonne` e `nomi_colonne`.
+#'
+#'
+#' ESEMPIO:
+#'
+#' numero_righe   <- ...............
+#'
+#' numero_colonne <- ...............
+#'
+#' nomi_colonne   <- ...............
+
+
+
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+#' Quanto visualizzato nella console sarà la risposta dello studente alla
+#' domanda. Dopodiché, passare alla domanda seguente.
+tdp1718_check_3()
+#'<!-- ===================================================================== -->
+
 
 
 

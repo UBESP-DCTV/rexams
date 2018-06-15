@@ -4,40 +4,49 @@
 #' A dataset containing the prices and other attributes of almost 54,000
 #' diamonds.
 #'
-#' @format A data frame with 15 rows and 52 variables:
-#' @section Data Type Representation
+#' @format A data frame with 765 rows and 4 variables:
+#' \describe{
+#'   \item{cause_of_death}{The cause of the death.}
+#'   \item{percentuale}{Percentage of death for the corresponding cause among
+#'     year and class of children age.
+#'   }
+#'   \item{anno}{Reference year.}
+#'   \item{mesi}{Class of children age expressed in month range from the birth.}
+#' }
+#'
+#' @section Data Type Representation:
 #'   Proportion (within the variable)
-#' @section Topic
+#' @section Topic:
 #'   Mortality
-#' @section Rationale
+#' @section Rationale:
 #'   Efforts to improve child survival can be effective only if they are based
 #'   on reasonably accurate information about the causes of childhood deaths.
 #'   Cause-of-death information is needed to prioritize interventions and plan
 #'   for their delivery, to determine the effectiveness of disease-specific
 #'   interventions, and to assess trends in disease burden in relation to
 #'   national and international goals.
-#' @section Definition
+#' @section Definition:
 #'   Distribution of main causes of death among children aged < 5 years,
 #'   expressed as percentage of total deaths. The causes of death refers to the
 #'   concept of the 'underlying cause of death' as defined by ICD-10
 #'   (WHO, 1992).
-#' @section Associated terms
+#' @section Associated terms:
 #'   Underlying cause of death : a) the disease or injury which initiated the
 #'   train of morbid events leading directly to death, or (b) the circumstances
 #'   of the accident or violence which produced the fatal injury (ICD-10)
-#' @section Preferred data sources
+#' @section Preferred data sources:
 #'   Civil registration with complete coverage and medical certification of
 #'   cause of death
-#' @section Other possible data sources
+#' @section Other possible data sources:
 #'   Special studies
-#' @section Method of measurement
+#' @section Method of measurement:
 #'   Data from civil registration with complete coverage (80% or over) and
 #'   medical certification of cause of death, or nationally representative
 #'   epidemiological studies of causes of child death (special studies analysing
 #'    causes of death based on verbal autopsy studies or other sources for
 #'    countries without civil registration data).
-
-#' @section Method of estimation
+#'
+#' @section Method of estimation:
 #'   Estimates of child causes of death were prepared by WHO and the Maternal
 #'   Child Epidemiology Estimation group (MCEE).   WHO regularly receives
 #'   mortality-by-cause data from Member States, as recorded in national civil
@@ -58,20 +67,19 @@
 #'   cause-specific mortality estimates.   For more details on MCEE/WHO
 #'   methodology to estimate child causes of death, please click here.
 #'   Predominant type of statistics: predicted and adjusted.
-
-#' @section M&E Framework
+#' @section M&E Framework:
 #'   Impact
-#' @section Method of estimation of global and regional aggregates
+#' @section Method of estimation of global and regional aggregates:
 #'   Aggregation of estimates for WHO Member States
-#' @section Disaggregation
+#' @section Disaggregation:
 #'   Age
-#' @section Expected frequency of data dissemination
+#' @section Expected frequency of data dissemination:
 #'   Annual
-#' @section Expected frequency of data collection
+#' @section Expected frequency of data collection:
 #'   Annual
-#' @section Links
+#' @section Links:
 #'   Global Health Estimates (WHO website)
-#' @section Comments
+#' @section Comments:
 #'   A better understanding of the indirect contributions of diseases to child
 #'   deaths is needed in order to assess disease control priorities and evaluate
 #'   interventions.

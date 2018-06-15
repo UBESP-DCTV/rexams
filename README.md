@@ -36,11 +36,13 @@ students about how to complete them. The comment are written in compiant
 way with knitr parsing capability to produce a final printable version
 of the exam.
 
-The package provide two main function: - `check_my_exam()`: return the
-score that could obtained if the exam was submitted at the moment -
-`submit_my_exam()`: conclude the exam, produce the corresponding
-HTML/PDF, and provide the possible final score (to be confirmed by the
-teacher).
+The package provide two main function:
+
+  - `check_my_exam()`: return the score that could obtained if the exam
+    was submitted at the moment
+  - `submit_my_exam()`: conclude the exam, produce the corresponding
+    HTML/PDF, and provide the possible final score (to be confirmed by
+    the teacher).
 
 ## Feature request
 
