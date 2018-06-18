@@ -12,7 +12,7 @@ status](https://codecov.io/gh/UBESP-DCTV/rexams/branch/master/graph/badge.svg)](
 The goal of rexams is to provide functionalities to automatically check
 and evaluate exams at UBESP.
 
-## Install and usage
+## Install
 
 To install the development version (the only one for the moment) from
 GitHub:
@@ -27,6 +27,22 @@ Once the package is installed, simply load it
 ``` r
 library(rexams)
 ```
+
+## Usage
+
+The package is inteded to provide coding exam templates. Those template
+are fancy-commented standard .R code-files to provide instruction to the
+students about how to complete them. The comment are written in compiant
+way with knitr parsing capability to produce a final printable version
+of the exam.
+
+The package provide two main function:
+
+  - `check_my_exam()`: return the score that could obtained if the exam
+    was submitted at the moment
+  - `submit_my_exam()`: conclude the exam, produce the corresponding
+    HTML/PDF, and provide the possible final score (to be confirmed by
+    the teacher).
 
 ## Feature request
 
