@@ -247,7 +247,7 @@ tdp1718_check_7 <- function() {
 #' @return logical (invisibly)
 #' @export
 tdp1718_check_8 <- function() {
-  reference <- read.csv("inst/exams/tdp1718/death_ita.csv")[-1]
+  reference <- read.csv(system.file("exams/tdp1718/death_ita.csv", package = "rexams"))[-1]
   reference[['mesi']] <- as.integer(reference[['mesi']])
   reference <- reference[
     order(reference$percentuale, reference$anno, reference$mesi),

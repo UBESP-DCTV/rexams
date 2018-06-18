@@ -14,7 +14,7 @@
 #'   collapse = TRUE
 #' )
 #' if (!require("rexams") || packageVersion('rexams') < '0.0.3') {
-#'   devtools::install_github(DCTV-UBESP/rexams, ref = 'tdp1718')
+#'   devtools::install_github("DCTV-UBESP/rexams")
 #'   library(rexams)
 #' }
 #' ```
@@ -122,8 +122,10 @@
 #'   si scrive incluso tra le virgolette).
 #'
 #'   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#'
 #'   SE QUESTO NON DOVESSE AVVENIRE, IL COMPITO SARÀ CONSIDERATO NULLO E NON
 #'   ATTRIBUIBILE AD ALCUNO STUDENTE IN NESSUN CASO.
+#'
 #'   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #'
 #'
@@ -201,7 +203,7 @@ tdp1718_check_1()
 #'<!-- ===================================================================== -->
 
 
-death_ita <- read.csv('inst/exams/tdp1718/death_ita.csv')
+death_ita <- read.csv('death_ita.csv')
 
 
 #'<!-- --------------------------------------------------------------------- -->
@@ -376,8 +378,8 @@ tdp1718_check_6()
 #'
 #'<!-- ===================================================================== -->
 
-max_perc_death <- dplyr::filter(death_ita, percentuale == max(percentuale, na.rm = TRUE))
 
+max_perc_death <- death_ita[which.max(death_ita$percentuale), ]
 
 
 #'<!-- --------------------------------------------------------------------- -->
@@ -413,10 +415,12 @@ tdp1718_check_7()
 #'
 #'<!-- ===================================================================== -->
 
+
 death_ita[["mesi"]] <- factor(death_ita[["mesi"]],
     levels = c("0-1", "0-59", "2-59"),
     labels = c("neonato", "prescolare", "fanciullo")
   )
+
 
 #'<!-- --------------------------------------------------------------------- -->
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
@@ -450,11 +454,14 @@ tdp1718_check_8()
 #'
 #'<!-- ===================================================================== -->
 
+
 median_p_death_causes <- tapply(
   X     = death_ita$percentuale,
   INDEX = list(death_ita$causa_del_decesso, death_ita$mesi),
-  FUN   = median, na.rm = TRUE
+  FUN   = median,
+  na.rm = TRUE
 )
+
 
 #'<!-- --------------------------------------------------------------------- -->
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
@@ -482,10 +489,12 @@ tdp1718_check_9()
 #'
 #'<!-- ===================================================================== -->
 
-top <- death_ita[order(death_ita$percentuale, decreasing = TRUE), ]
 
-top_neo_2000 <- top[top$mesi == 'neonato' & top$anno == 2000, ]
-top_neo_2016 <- top[top$mesi == 'neonato' & top$anno == 2016, ]
+topdown <- death_ita[order(death_ita$percentuale, decreasing = TRUE), ]
+
+top_neo_2000 <- topdown[topdown$mesi == 'neonato' & topdown$anno == 2000, ]
+top_neo_2016 <- topdown[topdown$mesi == 'neonato' & topdown$anno == 2016, ]
+
 
 #'<!-- --------------------------------------------------------------------- -->
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
@@ -537,9 +546,23 @@ tdp1718_check_10()
 #'
 #'<!-- ===================================================================== -->
 
+only_top_2000 <- death_ita[
+  death_ita$causa_del_decesso %in% top_neo_2000[['causa_del_decesso']][1:3],
+]
 xyplot(percentuale ~ anno | mesi,
        groups = causa_del_decesso,
-       data   = death_ita[death_ita$causa_del_decesso %in% top_five, ],
+       data   = only_top_2000,
+       auto.key = TRUE,
+       type = 'l'
+)
+
+
+only_top_2016 <- death_ita[
+  death_ita$causa_del_decesso %in% top_neo_2016[['causa_del_decesso']][1:3],
+]
+xyplot(percentuale ~ anno | mesi,
+       groups = causa_del_decesso,
+       data   = only_top_2016,
        auto.key = TRUE,
        type = 'l'
 )
