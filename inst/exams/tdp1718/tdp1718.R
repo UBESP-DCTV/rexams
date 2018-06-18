@@ -25,6 +25,11 @@
 
 
 
+
+
+
+
+
 #'<!-- ===================================================================== -->
 #' # ISTRUZIONI
 #'
@@ -34,10 +39,10 @@
 #' risoluzione dell'esame. Inoltre, al termine, si potrà produrre un documento
 #' riportante líntera soluzione con ogni output riportato.
 #'
-
-
-
-
+#'
+#'
+#'
+#'
 #' ## Informazioni preliminari
 #'
 #' * Chi lo desiderasse, può appoggiare il proprio cellulare sulla
@@ -73,7 +78,7 @@
 #'
 #'
 #' * PER OTTENERE L'IDONEITÀ SARÀ NECESSARIO (E SUFFICIENTE) TOTALIZZARE ALMENO
-#'   6 (SEI) PUNTI.
+#'   9 (NOVE) PUNTI. Il punteggio massimo è pari a 15 punti.
 #'
 #'
 #' * In ogni momento durante lo svolgimento del compito salvando il presente
@@ -101,20 +106,36 @@
 #'   personali, mentre non è consentito utilizzare dispositivi di comunicazione
 #'   con terzi (cellulare, internet, ...)
 #'
-
-
-
-
-#' ## Prima di cominciare
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#'
+#' #' ## Prima di cominciare
 #'
 #' * Inserire il proprio nome e cognome al posto di NOME_DEL_CANDIDATO alla
 #'   quarta riga di questo script, affianco alla voce author (lasciando quanto
-#'   si scrive incluso tra le virgolette). Se questo non dovesse avvenire,
-#'   il compitò sarà considerato nullo e non attribuibile a nessuno in nessun
-#'   caso.
+#'   si scrive incluso tra le virgolette).
+#'
+#'   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#'   SE QUESTO NON DOVESSE AVVENIRE, IL COMPITO SARÀ CONSIDERATO NULLO E NON
+#'   ATTRIBUIBILE AD ALCUNO STUDENTE IN NESSUN CASO.
+#'   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#'
+#'
+#'  * Si consiglia di scrivere tutte le chiamate a `library()` per caricare i
+#'    pacchetti che si utilizzeranno (se se ne utilizzerano...) nello spazio
+#'    non commentato immediatamente qui sotto, prima della parte di inizio
+#'    dell'esame. In questo modo sarà più agevole e facilitata la lettura
+#'    dello script. Seguire questa convenzione non è necessario ma vivamente
+#'    consigliato.
 #'
 
-
+library(lattice)
 
 
 
@@ -187,6 +208,8 @@ death_ita <- read.csv('inst/exams/tdp1718/death_ita.csv')
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
 #' (selezionarla e premere `CTRL + INVIO`).
 #'
+#' Dopodiché, passare alla domanda seguente.
+#'
 tdp1718_check_2()
 #'<!-- ===================================================================== -->
 
@@ -217,6 +240,7 @@ tdp1718_check_2()
 #' numero_colonne <- ...............
 #'
 #' nomi_colonne   <- ...............
+#'
 
 
 numero_righe   <- nrow(death_ita)
@@ -231,8 +255,6 @@ nomi_colonne   <- colnames(death_ita)
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
 #' (selezionarla e premere `CTRL + INVIO`).
 #'
-#' Quanto visualizzato nella console sarà la risposta dello studente alla
-#' domanda. Dopodiché, passare alla domanda seguente.
 tdp1718_check_3()
 #'<!-- ===================================================================== -->
 
@@ -258,15 +280,13 @@ tdp1718_check_3()
 #'<!-- ===================================================================== -->
 
 
-
+colnames(death_ita)[[1]] <- 'causa_del_decesso'
 
 
 #'<!-- --------------------------------------------------------------------- -->
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
 #' (selezionarla e premere `CTRL + INVIO`).
 #'
-#' Quanto visualizzato nella console sarà la risposta dello studente alla
-#' domanda. Dopodiché, passare alla domanda seguente.
 tdp1718_check_4()
 #'<!-- ===================================================================== -->
 
@@ -282,45 +302,253 @@ tdp1718_check_4()
 #'<!-- ===================================================================== -->
 #' ## Domanda 5 (punteggio = 1, propedeutica: no)
 #'
+#' Trasformare tutto il testo all'interno della variabile `causa_del_decesso` in
+#' caratteri tutti minuscoli. Per esempio, `Diarrhoeal disease` deve diventare
+#' `diarrhoeal disease`.
+#'
+#' Scrivere il codice che svolge il compito nello spazio non comentato qui
+#' sotto.
+#'
 #'<!-- ===================================================================== -->
+
+
+death_ita[[1]] <- tolower(death_ita[[1]])
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_5()
+#'<!-- ===================================================================== -->
+
+
+
+
+
+
+
 
 
 
 #'<!-- ===================================================================== -->
 #' ## Domanda 6 (punteggio = 1, propedeutica: no)
 #'
+#' #' Sostituire nelle descrizioni dei decessi (dentro la variabile
+#' `causa_del_decesso` del dataframe `death_ita`) ogni occorrenza dello spazio
+#' con un *underscore* (ovvero il carattere `_`). Per esempio,
+#' `diarrhoeal disease` deve diventare `diarrhoeal_disease`.
+#'
 #'<!-- ===================================================================== -->
+
+
+death_ita[[1]] <- gsub(" ", "_", death_ita[[1]])
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_6()
+#'<!-- ===================================================================== -->
+
+
+
+
+
+
+
 
 
 
 #'<!-- ===================================================================== -->
 #' ## Domanda 7 (punteggio = 1, propedeutica: no)
 #'
-#'<!-- ===================================================================== -->
-
-
-
-#'<!-- ===================================================================== -->
-#' ## Domanda 8 (punteggio = 1, propedeutica: no)
+#' Creare un dataframe con solamente la/le riga/e che riportano il/i caso/i in
+#' cui la causa del decesso, l'anno e la classe di età del bambino
+#' (variabile `mesi`) che hanno visto la più alta percentuale (relativa, ovvero
+#' quella espressa dalla variabile `percentuale`) di decessi. Nominare il
+#' dataframe risultante come `max_perc_death`.
+#'
+#' Esempio:
+#'
+#' max_per_death <- ...............
 #'
 #'<!-- ===================================================================== -->
 
+max_perc_death <- dplyr::filter(death_ita, percentuale == max(percentuale, na.rm = TRUE))
+
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_7()
+#'<!-- ===================================================================== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #'<!-- ===================================================================== -->
-#' ## Domanda 9 (punteggio = 2, propedeutica: no)
+#' ## Domanda 8 (punteggio = 2, propedeutica: no)
+#'
+#' Rinominare i livelli della variabile `mesi` secondo la seguante convenzione:
+#'
+#' "0-1"  = "neonato"
+#' "2-59" = "fanciullo"
+#' "0-59" = "prescolare"
 #'
 #'<!-- ===================================================================== -->
 
+death_ita[["mesi"]] <- factor(death_ita[["mesi"]],
+    levels = c("0-1", "0-59", "2-59"),
+    labels = c("neonato", "prescolare", "fanciullo")
+  )
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_8()
+#'<!-- ===================================================================== -->
+
+
+
+
+
 
 
 #'<!-- ===================================================================== -->
-#' ## Domanda 10 (punteggio = 2, propedeutica: no)
+#' ## Domanda 9 (punteggio = 3, propedeutica: no)
+#'
+#' Trovare per ogni causa e ogni classe di età (variabile `mesi`) il valore
+#' mediano della percentuale di decessi dovuti a tali cause in tali classi negli
+#' presi in considerazione. In altre parole, creare una tabella in cui nelle
+#' righe ci siano le cause di decesso, nelle colonne le classi di età e nelle
+#' cui celle sia presente il valore mediano di probabilità negli anni di cui si
+#' dispone di tale valore. Salvare la tabella con il nome `median_p_death_causes`
+#'
+#' ATTENZIONE  : gestire bene i dati mancanti
+#' SUGGERIMENTO: usare la funzione `tapply()`
+#'
+#' ESEMPIO:
+#'
+#' median_p_death_causes <- ..................
 #'
 #'<!-- ===================================================================== -->
 
+median_p_death_causes <- tapply(
+  X     = death_ita$percentuale,
+  INDEX = list(death_ita$causa_del_decesso, death_ita$mesi),
+  FUN   = median, na.rm = TRUE
+)
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_9()
+#'<!-- ===================================================================== -->
 
 
 
 
 
+
+
+
+
+
+#'<!-- ===================================================================== -->
+#' ## Domanda 10 (punteggio = 2 + 1, propedeutica: si)
+#'
+#' Produrre due dataframe, nominati rispettivamente `top_neo_2000` e
+#' `top_neo_2016`, riportanti il primo i soli dati riferiti all'anno 2000 e ai
+#' neonati, ordinati dalla causa più frequente alla meno frequente, il secondo
+#' analogo ma per i dati del 2016.
+#'
+#'<!-- ===================================================================== -->
+
+top <- death_ita[order(death_ita$percentuale, decreasing = TRUE), ]
+
+top_neo_2000 <- top[top$mesi == 'neonato' & top$anno == 2000, ]
+top_neo_2016 <- top[top$mesi == 'neonato' & top$anno == 2016, ]
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+tdp1718_check_10()
+#'<!-- ===================================================================== -->
+
+
+
+
+
+
+
+
+
+
+#'<!-- ===================================================================== -->
+#' ## Domanda 11 (punteggio = 1, propedeutica: no)
+#'
+#' A partire dai due dataset creati alla domanda 10 (ovvero `top_neo_2000` e
+#' `top_neo_2016`) creare due grafici distinti (ma del tutto analoghi) in cui si
+#' apprezzi l'andamento negli anni della probabilità di decesso per le sole
+#' prime tre cause di decesso al 2000 (un grafico) e per le prime tre cause al
+#' 2016 (secondo grafico).
+#'
+#' Suddividere ciascun grafico in pannelli coerenti con la classe di età dei
+#' bambini.
+#'
+#' Commentare quindi (riempiendo l'opportuno spazio qui sotto) il risultato.
+#'
+#'
+#' NOTA: il punteggio per questa domanda è solo positivo, se sbagliata non
+#' concorre a intaccare il punteggio ottenuto fino a questo momento. Inoltre,
+#' essendo la grafica non "statica" non ci sarà alcuna "valutazione" automatica.
+#'
+#'
+#' SUGGERIMENTI:
+#'
+#'   - usare il pacchetto `lattice` (da caricare all'inizio di questo script
+#'     nella zona adibita ai pacchetti) e la sua funzione `xyplot()` per
+#'     rappresentare il grafico sul sottoinsieme dei dati relativo solo alle
+#'     cause di interesse, che mappi le percentuali in funzione degli anni,
+#'     condizionatamente alle classi di età e raggruppate per causa. (si
+#'     suggerisce inoltre di inserire l'opzione `type = 'l'` per rappresentare
+#'     il grafico con delle linee e non con dei punti, e aggiungere l'opzione
+#'     `auto.key = TRUE` per far comparire la legenda)
+#'   - fare la stessa cosa per l'anno 2016.
+#'
+#'<!-- ===================================================================== -->
+
+xyplot(percentuale ~ anno | mesi,
+       groups = causa_del_decesso,
+       data   = death_ita[death_ita$causa_del_decesso %in% top_five, ],
+       auto.key = TRUE,
+       type = 'l'
+)
+
+
+message("
+  Commento alle figure prodotte (cancellare questa parentesi e i puntini):
+  .............................................................................
+  .............................................................................
+  .............................................................................
+  .............................................................................
+")
