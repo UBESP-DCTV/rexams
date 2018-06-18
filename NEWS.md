@@ -1,3 +1,7 @@
+# rexams 0.0.3
+
+* Added 11 questions with 10 tests.
+
 # rexams 0.0.2
 
 * First three question for tdp1718 with first check funcitons.
