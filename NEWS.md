@@ -1,3 +1,7 @@
+# rexams 0.0.4
+
+* Check fixes.
+
 # rexams 0.0.3
 
 * Added 11 questions with 10 tests.
