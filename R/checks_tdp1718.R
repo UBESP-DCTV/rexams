@@ -1,10 +1,14 @@
-tdp1718_check_1 <- function() {
+tdp1718_check_1 <- function(requested_wd = NULL) {
 
   message(paste0(
-    'La directory di lavoro impostata è: ', actual_wd, '.\n'
+    'La directory di lavoro impostata è: ', getwd(), '.\n'
   ))
 
-  invisible(TRUE)
+  if (getwd == requested_wd) {
+    return(invisible(TRUE))
+  } else {
+    return(invisible(FALSE))
+  }
 
 }
 
