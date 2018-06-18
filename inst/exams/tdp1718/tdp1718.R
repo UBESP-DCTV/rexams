@@ -120,6 +120,9 @@
 
 
 
+
+
+
 #'<!-- ===================================================================== -->
 #' # ESAME
 #'
@@ -127,15 +130,15 @@
 #'<!-- ===================================================================== -->
 #' ## Domanda 1 (punteggio = 1, propedeutica: si)
 #'
-#' Per prima cosa è necessario importare la cartella di lavoro
-#' (Working Directory).
+#' Per prima cosa è necessario impostare la cartella di lavoro (Working
+#' Directory).
 #'
 #' Nel caso si usi del codice per eseguire questa operazione lo si scriva qui
-#' sotto nello spazio senza i caratteri di commento iniziali `#'`
+#' sotto nello spazio senza i caratteri di commento iniziali `#'`.
 #'
 #' > NOTA: non è necessario impostare la cartella di lavoro tramite codice,
 #'         è possibile infatti farlo anche "punta e clicca" da RStudio.
-#'         Eseguire lésercizio come si preferisce.
+#'         Eseguire l'esercizio come si preferisce.
 #'
 
 
@@ -143,10 +146,10 @@
 
 
 #'<!-- --------------------------------------------------------------------- -->
-#' Una volta impostata la cartella di lavoro correttamente, eseguire la seguente
-#' istruzione (selezionarla e premere `CTRL + INVIO`). Quanto visualizzato
-#' nella console dovrà corrispondere allíndirizzo richiesto. Dopodiché, passare
-#' alla domanda seguente.
+#' Una volta impostata la cartella di lavoro, eseguire la seguente
+#' istruzione (selezionarla e premere `CTRL + INVIO`). perchè lésercizio sia
+#' giusto, quanto visualizzato nella console dovrebbe corrispondere
+#' all'indirizzo richiesto. Dopodiché, passare alla domanda seguente.
 #'
 tdp1718_check_1()
 #'<!-- ===================================================================== -->
@@ -166,8 +169,9 @@ tdp1718_check_1()
 #'
 #' A questo punto si possono caricare i dati.
 #'
-#' Completare il codice seguente per importare il dataset richiesto in un
-#' dataframe dal nome `death_ita`.
+#' Completare il codice seguente per importare il dataset che si trova
+#' all'interno del file `death_ita.csv` (che si trova già allínterno della
+#' cartella di lavoro) in un dataframe dal nome `death_ita`.
 #'
 #' ESEMPIO:
 #'
@@ -176,7 +180,7 @@ tdp1718_check_1()
 #'<!-- ===================================================================== -->
 
 
-
+death_ita <- read.csv('inst/exams/tdp1718/death_ita.csv')
 
 
 #'<!-- --------------------------------------------------------------------- -->
@@ -198,7 +202,7 @@ tdp1718_check_2()
 #'<!-- ===================================================================== -->
 #' ## Domanda 3 (punteggio = 1, propedeutica: no)
 #'
-#'  Iniziare a investigare la abse di dati ricavando il numero di righe e
+#'  Iniziare a investigare la base di dati ricavando il numero di righe e
 #'  colonne, e il nome delle colonne.
 #'
 #' Scrivere, nello spazio non commentato, il codice per trovare le informazioni
@@ -215,6 +219,11 @@ tdp1718_check_2()
 #' nomi_colonne   <- ...............
 
 
+numero_righe   <- nrow(death_ita)
+
+numero_colonne <- ncol(death_ita)
+
+nomi_colonne   <- colnames(death_ita)
 
 
 
@@ -231,10 +240,42 @@ tdp1718_check_3()
 
 
 
+
+
+
+
+
 #'<!-- ===================================================================== -->
 #' ## Domanda 4 (punteggio = 1, propedeutica: no)
 #'
+#' Per uniformità di linguaggio, rinominare le colonne con nome inglese in
+#' italiano.
+#'
+#' In particolare, scrivere nello spazio non commentato qui sotto, il codice
+#' utile a modificare il nome della colonna `cause_of_death` in
+#' `causa_del_decesso`.
+#'
 #'<!-- ===================================================================== -->
+
+
+
+
+
+#'<!-- --------------------------------------------------------------------- -->
+#' Una volta completato il codice richiesto, eseguire la seguente istruzione
+#' (selezionarla e premere `CTRL + INVIO`).
+#'
+#' Quanto visualizzato nella console sarà la risposta dello studente alla
+#' domanda. Dopodiché, passare alla domanda seguente.
+tdp1718_check_4()
+#'<!-- ===================================================================== -->
+
+
+
+
+
+
+
 
 
 
