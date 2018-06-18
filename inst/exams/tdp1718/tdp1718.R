@@ -13,8 +13,8 @@
 #'   error    = TRUE,
 #'   collapse = TRUE
 #' )
-#' if (!require("rexams") || packageVersion('rexams') < '0.0.4') {
-#'   devtools::install_github("DCTV-UBESP/rexams")
+#' if (!require("rexams") || packageVersion('rexams') < '0.0.5') {
+#'   devtools::install_github("UBESP-DCTV/rexams")
 #'   library(rexams)
 #' }
 #' ```

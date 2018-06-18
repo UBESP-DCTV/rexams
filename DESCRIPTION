@@ -1,6 +1,6 @@
 Package: rexams
 Title: Exams check at UBESP
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: person("Corrado", "Lanera", 
     email = "corrado.lanera@gmail.com", 
     role  = c("aut", "cre")
