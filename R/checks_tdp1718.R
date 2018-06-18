@@ -38,19 +38,22 @@ tdp1718_check_1 <- function() {
 #' @export
 tdp1718_check_2 <- function() {
   required_names <- c("death_ita")
-  names_ok <- required_names %in% ls('.GlobalEnv')
+  names_ok <- exists(required_names, envir = parent.frame(), inherits = FALSE)
 
   if (!all(names_ok)) {
     message(paste0(
       "L'oggetto richiesto '", required_names[!names_ok], "' manca."
     ))
-    return(invisible(NULL))
+    return(invisible(FALSE))
   }
 
   if (
     is.data.frame(death_ita) &&
-    dim(death_ita) == c(765L, 4L)      &&
-    purrr::map_chr(death_ita, class) == c('factor', 'numeric', 'integer', 'factor')
+    all(dim(death_ita) == c(765L, 4L))      &&
+    (
+      all(purrr::map_chr(death_ita, class) == c('character', 'numeric', 'integer', 'character')) ||
+      all(purrr::map_chr(death_ita, class) == c('factor', 'numeric', 'integer', 'factor'))
+    )
   ) {
     message('La base di dati sembra importata correttamente.\n')
     return(invisible(TRUE))
@@ -75,11 +78,11 @@ tdp1718_check_2 <- function() {
 #' @export
 tdp1718_check_3 <- function() {
   required_names <- c("numero_righe", "numero_colonne", "nomi_colonne")
-  names_ok <- required_names %in% ls('.GlobalEnv')
+  names_ok <- purrr::map_lgl(required_names, exists)
 
   if (!all(names_ok)) {
     message(paste0(
-      "La variabile richiesta '", required_names[!names_ok], "' manca."
+      "La variabile richiesta '", required_names[!names_ok], "' manca.\n"
     ))
     return(invisible(FALSE))
   }
@@ -213,7 +216,7 @@ tdp1718_check_6 <- function() {
 #' @return logical (invisibly)
 #' @export
 tdp1718_check_7 <- function() {
-  if (!'max_perc_death' %in% ls('.GlobalEnv')) {
+  if (!exists('max_perc_death')) {
     message("Il dataframe `max_perc_death` sembra non essere stato creato...\n")
     return(invisible(FALSE))
   } else if (!is.data.frame(max_perc_death)) {
@@ -288,7 +291,7 @@ tdp1718_check_8 <- function() {
 #' @return logical (invisibly)
 #' @export
 tdp1718_check_9 <- function() {
-  if (!'median_p_death_causes' %in% ls('.GlobalEnv')) {
+  if (!exists('median_p_death_causes')) {
     message(
       "La tabella `median_p_death_causes` sembra non essere stata creata...\n"
     )
@@ -337,7 +340,7 @@ tdp1718_check_9 <- function() {
 #' @export
 tdp1718_check_10 <- function() {
   df_requested <- c('top_neo_2000', 'top_neo_2016')
-  df_ok <- df_requested %in% ls('.GlobalEnv')
+  df_ok <- df_requested %in% ls(".GlobalEnv")
   df_provided <- df_requested[df_ok]
 
 
@@ -363,7 +366,7 @@ tdp1718_check_10 <- function() {
 
         all(top_neo_2000[['anno']] == 2000)                 &&
 
-        all(top_neo_2000[['mesi']] == 'neonato')
+        all(top_neo_2000[['mesi']] %in% c('neonato', '0-1'))
     ) {
       message('`top_neo_2000` sembra essere corretto.\n')
       mark <- TRUE
@@ -392,7 +395,7 @@ tdp1718_check_10 <- function() {
 
       all(top_neo_2016[['anno']] == 2016)                 &&
 
-      all(top_neo_2016[['mesi']] == 'neonato')
+      all(top_neo_2016[['mesi']]  %in% c('neonato', '0-1'))
     ) {
       message('`top_neo_2016` sembra essere corretto.\n')
       mark <- TRUE
@@ -431,6 +434,7 @@ tdp1718_check_10 <- function() {
 score_my_exam <- function() {
   suppressMessages({
     partial_score <-
+      tdp1718_check_3() +
       tdp1718_check_4() +
       tdp1718_check_5() +
       tdp1718_check_6() +
@@ -443,18 +447,18 @@ score_my_exam <- function() {
   if (partial_score == 0L) {
     final_score <-
       score(tdp1718_check_1) +
-      score(tdp1718_check_2) +
-      score(tdp1718_check_3)
+      score(tdp1718_check_2)
   } else {
     suppressMessages({
-      final_score <- 3L +
-        score(tdp1718_check_4()) +
-        score(tdp1718_check_5()) +
-        score(tdp1718_check_6()) +
-        score(tdp1718_check_7()) +
-        2L * score(tdp1718_check_8()) +
-        3L * score(tdp1718_check_9()) +
-        tdp1718_check_10()
+      final_score <-
+        rexams:::score(tdp1718_check_3()) +
+        rexams:::score(tdp1718_check_4()) +
+        rexams:::score(tdp1718_check_5()) +
+        rexams:::score(tdp1718_check_6()) +
+        rexams:::score(tdp1718_check_7()) +
+        2L * rexams:::score(tdp1718_check_8()) +
+        3L * rexams:::score(tdp1718_check_9()) +
+        tdp1718_check_10() + 2L
     })
   }
 
@@ -477,6 +481,6 @@ score_my_exam <- function() {
 #'
 #' @export
 submit_my_exam <- function(x = 'tdp1718.R') {
-  rmarkdown::render(x, encoding = "UTF-8")
+  rmarkdown::render(x, encoding = "UTF-8", envir = new.env())
   utils::browseURL(stringr::str_replace_all(x, "(.+)\\..+?$", "\\1\\.nb\\.html"))
 }
