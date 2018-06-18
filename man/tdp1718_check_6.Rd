@@ -4,7 +4,10 @@
 \alias{tdp1718_check_6}
 \title{tdp check 6}
 \usage{
-tdp1718_check_6()
+tdp1718_check_6(text_var = "causa_del_decesso")
+}
+\arguments{
+\item{text_var}{\link{chr} name of the variable to transform}
 }
 \value{
 logical (invisibly)

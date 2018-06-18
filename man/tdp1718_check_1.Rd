@@ -4,7 +4,10 @@
 \alias{tdp1718_check_1}
 \title{tdp check 1}
 \usage{
-tdp1718_check_1()
+tdp1718_check_1(file_to_check = "death_ita.csv")
+}
+\arguments{
+\item{file_to_check}{\link{chr} name of a file which should be into the WD}
 }
 \value{
 logical (invisibly)

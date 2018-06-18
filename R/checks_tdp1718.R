@@ -1,18 +1,19 @@
 #' tdp check 1
 #'
+#' @param file_to_check [chr] name of a file which should be into the WD
+#'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_1 <- function() {
+tdp1718_check_1 <- function(file_to_check = "death_ita.csv") {
 
   message(paste0(
     'Directory di lavoro impostata: ', getwd(), '.\n'
   ))
 
-  if (file.exists('death_ita.csv')) {
+  if (file.exists(file_to_check)) {
     message(paste0(
       'Sembra essere corretta.\n'
     ))
-
     return(invisible(TRUE))
   } else {
     message(paste0(
@@ -20,7 +21,6 @@ tdp1718_check_1 <- function() {
     ))
     return(invisible(FALSE))
   }
-
 }
 
 
@@ -37,7 +37,7 @@ tdp1718_check_1 <- function() {
 #' @return logical (invisibly)
 #' @export
 tdp1718_check_2 <- function() {
-  required_names <- c("death_ita")
+  required_names <- "death_ita"
   names_ok <- exists(required_names, envir = parent.frame(), inherits = FALSE)
 
   if (!all(names_ok)) {
@@ -119,16 +119,18 @@ tdp1718_check_3 <- function() {
 
 #' tdp check 4
 #'
+#' @param main_df a data.frame
+#'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_4 <- function() {
-  if ('cause_of_death' %in% colnames(death_ita)) {
+tdp1718_check_4 <- function(main_df = death_ita) {
+  if ('cause_of_death' %in% colnames(main_df)) {
     message(
       'la colonna `cause_of_death` sembra essere ancora presente nel dataset.\n'
     )
     return(invisible(FALSE))
   } else if (
-    !'causa_del_decesso' %in% colnames(death_ita)
+    !'causa_del_decesso' %in% colnames(main_df)
   ) {
     message(
       'la colonna `causa_del_decesso` non sembra presente nel dataset.\n'
@@ -153,21 +155,22 @@ tdp1718_check_4 <- function() {
 
 #' tdp check 5
 #'
+#' @param text_var [chr] name of the variable to transform
+#' @param .fun the function requested for the transformation. Note, the
+#'        function schould be an idempotent one, i.e.
+#'        `.fun(.fun(x)) == .fun(x)`.`
+#'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_5 <- function() {
+tdp1718_check_5 <- function(text_var = "causa_del_decesso", .fun = tolower) {
   if (all(
-    death_ita[['causa_del_decesso']] ==
-    tolower(death_ita[['causa_del_decesso']])
+    death_ita[[text_var]] ==
+    .fun(death_ita[[text_var]])
   )) {
-    message(
-      "L'esercizio sembra essere corretto.\n"
-    )
+    message("L'esercizio sembra essere corretto.\n")
     return(invisible(TRUE))
   } else {
-    message(
-      "L'esercizio non sembra essere corretto...\n"
-    )
+    message("L'esercizio non sembra essere corretto...\n")
     return(invisible(FALSE))
   }
 }
@@ -183,21 +186,19 @@ tdp1718_check_5 <- function() {
 
 #' tdp check 6
 #'
+#' @param text_var [chr] name of the variable to transform
+#'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_6 <- function() {
+tdp1718_check_6 <- function(text_var = "causa_del_decesso") {
   if (all(
-    death_ita[['causa_del_decesso']] ==
-    gsub(" ", "_", death_ita[['causa_del_decesso']])
+    death_ita[[text_var]] ==
+    gsub(" ", "_", death_ita[[text_var]])
   )) {
-    message(
-      "L'esercizio sembra essere corretto.\n"
-    )
+    message("L'esercizio sembra essere corretto.\n")
     return(invisible(TRUE))
   } else {
-    message(
-      "L'esercizio non sembra essere corretto...\n"
-    )
+    message("L'esercizio non sembra essere corretto...\n")
     return(invisible(FALSE))
   }
 }
@@ -247,25 +248,38 @@ tdp1718_check_7 <- function() {
 
 #' tdp check 8
 #'
+#' @param df_name [chr] the name of the principal data.frame
+#'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_8 <- function() {
-  reference <- read.csv(system.file("exams/tdp1718/death_ita.csv", package = "rexams"))[-1]
-  reference[['mesi']] <- as.integer(reference[['mesi']])
+tdp1718_check_8 <- function(df_name   = "death_ita",
+                            ord_one   = 'percentuale',
+                            ord_two   = 'anno',
+                            ord_three = 'mesi'
+) {
+  reference <- read.csv(
+    system.file("exams/tdp1718/death_ita.csv", package = "rexams")
+  )[-1]
+  reference[[ord_three]] <- as.integer(reference[[ord_three]])
   reference <- reference[
     order(reference$percentuale, reference$anno, reference$mesi),
   ]
 
+  if (!exists(df_name)) {
+    message("The main dataframe seams not imported...\n")
+    return(invisible(FALSE))
+  }
+
   to_check <- death_ita[-1]
-  to_check[['mesi']] <- as.integer(to_check[['mesi']])
+  to_check[[ord_three]] <- as.integer(to_check[[ord_three]])
   to_check <- to_check[
-    order(to_check$percentuale, to_check$anno, to_check$mesi),
+    order(to_check[[ord_one]], to_check[[ord_two]], to_check[[ord_three]]),
     ]
 
   if (
     all.equal(reference, to_check) &&
     setequal(
-      levels(death_ita[['mesi']]),
+      levels(death_ita[[ord_three]]),
       c("neonato", "prescolare", "fanciullo")
     )
   ) {
@@ -288,10 +302,12 @@ tdp1718_check_8 <- function() {
 
 #' tdp check 9
 #'
+#' @param matrix_name [chr] the name of the requested matrix
+#'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_9 <- function() {
-  if (!exists('median_p_death_causes')) {
+tdp1718_check_9 <- function(matrix_name = "median_p_death_causes") {
+  if (!exists(matrix_name)) {
     message(
       "La tabella `median_p_death_causes` sembra non essere stata creata...\n"
     )
@@ -340,17 +356,15 @@ tdp1718_check_9 <- function() {
 #' @export
 tdp1718_check_10 <- function() {
   df_requested <- c('top_neo_2000', 'top_neo_2016')
-  df_ok <- df_requested %in% ls(".GlobalEnv")
+  df_ok <- purrr::map_lgl(df_requested, exists)
   df_provided <- df_requested[df_ok]
 
 
   if (!all(df_ok)) {
-    message(
-      "Sembra che almeno uno dei due dataset non sia stato creato...\n"
-    )
+    message("Sembra che almeno uno dei due dataset non sia stato creato...\n")
   }
 
-  mark <- FALSE
+  mark  <- FALSE
   first <- TRUE
   score <- 0L
 
@@ -438,9 +452,9 @@ score_my_exam <- function() {
       tdp1718_check_4() +
       tdp1718_check_5() +
       tdp1718_check_6() +
-      tdp1718_check_7() +
+      2L * tdp1718_check_7() +
       2L * tdp1718_check_8() +
-      3L * tdp1718_check_9() +
+      2L * tdp1718_check_9() +
       tdp1718_check_10()
   })
 
@@ -455,9 +469,9 @@ score_my_exam <- function() {
         rexams:::score(tdp1718_check_4()) +
         rexams:::score(tdp1718_check_5()) +
         rexams:::score(tdp1718_check_6()) +
-        rexams:::score(tdp1718_check_7()) +
+        2L * rexams:::score(tdp1718_check_7()) +
         2L * rexams:::score(tdp1718_check_8()) +
-        3L * rexams:::score(tdp1718_check_9()) +
+        2L * rexams:::score(tdp1718_check_9()) +
         tdp1718_check_10() + 2L
     })
   }

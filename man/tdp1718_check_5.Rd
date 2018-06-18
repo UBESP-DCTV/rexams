@@ -4,7 +4,14 @@
 \alias{tdp1718_check_5}
 \title{tdp check 5}
 \usage{
-tdp1718_check_5()
+tdp1718_check_5(text_var = "causa_del_decesso", .fun = tolower)
+}
+\arguments{
+\item{text_var}{\link{chr} name of the variable to transform}
+
+\item{.fun}{the function requested for the transformation. Note, the
+function schould be an idempotent one, i.e.
+\code{.fun(.fun(x)) == .fun(x)}.`}
 }
 \value{
 logical (invisibly)

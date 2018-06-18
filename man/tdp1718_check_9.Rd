@@ -4,7 +4,10 @@
 \alias{tdp1718_check_9}
 \title{tdp check 9}
 \usage{
-tdp1718_check_9()
+tdp1718_check_9(matrix_name = "median_p_death_causes")
+}
+\arguments{
+\item{matrix_name}{\link{chr} the name of the requested matrix}
 }
 \value{
 logical (invisibly)

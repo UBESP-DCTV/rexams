@@ -4,7 +4,11 @@
 \alias{tdp1718_check_8}
 \title{tdp check 8}
 \usage{
-tdp1718_check_8()
+tdp1718_check_8(df_name = "death_ita", ord_one = "percentuale",
+  ord_two = "anno", ord_three = "mesi")
+}
+\arguments{
+\item{df_name}{\link{chr} the name of the principal data.frame}
 }
 \value{
 logical (invisibly)
