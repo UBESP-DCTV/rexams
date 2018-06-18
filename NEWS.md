@@ -1,3 +1,9 @@
+# rexams 0.0.5
+
+* Added `score()` function to score a single assignment
+* Added `submit_my_exam()` to render and open the rendered exam on the Browser
+* Added `score_my_exam()` function to score the exam
+
 # rexams 0.0.4
 
 * Check fixes.

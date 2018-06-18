@@ -342,16 +342,19 @@ tdp1718_check_10 <- function() {
 
 
   if (!all(df_ok)) {
-    warning(
+    message(
       "Sembra che almeno uno dei due dataset non sia stato creato...\n"
     )
   }
 
-  mark <- 0
+  mark <- FALSE
+  first <- TRUE
+  score <- 0L
 
-  try(
+  try(silent = TRUE, {
     if (!is.data.frame(top_neo_2000)) {
       message('`top_neo_2000` sembra non essere un dataframe...\n')
+      mark <- FALSE
     } else if (
         top_neo_2000[['causa_del_decesso']][1:2] ==
           c('prematurity', 'congenital_anomalies')          &&
@@ -363,13 +366,24 @@ tdp1718_check_10 <- function() {
         all(top_neo_2000[['mesi']] == 'neonato')
     ) {
       message('`top_neo_2000` sembra essere corretto.\n')
-      mark <- mark + 1
+      mark <- TRUE
+    } else {
+      message('`top_neo_2000` sembra non essere corretto...\n')
+      mark <- FALSE
     }
-  )
 
-  try(
+    score <- score + score(mark)
+    if (score(mark) > 0L) {
+      score <- score + 1L
+      first <- FALSE
+    }
+  })
+
+  mark <- FALSE
+  try(silent = TRUE, {
     if (!is.data.frame(top_neo_2016)) {
       message('`top_neo_2016` sembra non essere un dataframe...\n')
+      mark <- FALSE
     } else if (
       top_neo_2016[['causa_del_decesso']][1:2] ==
       c('prematurity', 'congenital_anomalies')            &&
@@ -381,12 +395,88 @@ tdp1718_check_10 <- function() {
       all(top_neo_2016[['mesi']] == 'neonato')
     ) {
       message('`top_neo_2016` sembra essere corretto.\n')
-      mark <- mark + 1
+      mark <- TRUE
+    } else {
+      message('`top_neo_2016` sembra non essere corretto...\n')
+      mark <- FALSE
     }
-  )
 
-  if (mark == 2) {
-    mark <- 3
+    score <- score + score(mark)
+    if (first) {
+      score <- score + score(mark)
+      first <- FALSE
+    }
+  })
+
+  if (score < 0) {
+    score <- score - first
   }
-  return(invisible(mark))
+
+  invisible(score)
+}
+
+
+
+
+
+
+
+
+
+
+#' tdp score overall
+#'
+#' @return the final score
+#' @export
+score_my_exam <- function() {
+  suppressMessages({
+    partial_score <-
+      tdp1718_check_4() +
+      tdp1718_check_5() +
+      tdp1718_check_6() +
+      tdp1718_check_7() +
+      2L * tdp1718_check_8() +
+      3L * tdp1718_check_9() +
+      tdp1718_check_10()
+  })
+
+  if (partial_score == 0L) {
+    final_score <-
+      score(tdp1718_check_1) +
+      score(tdp1718_check_2) +
+      score(tdp1718_check_3)
+  } else {
+    suppressMessages({
+      final_score <- 3L +
+        score(tdp1718_check_4()) +
+        score(tdp1718_check_5()) +
+        score(tdp1718_check_6()) +
+        score(tdp1718_check_7()) +
+        2L * score(tdp1718_check_8()) +
+        3L * score(tdp1718_check_9()) +
+        tdp1718_check_10()
+    })
+  }
+
+  message(paste0(
+    "Punteggio finale stimato per questo esame: ", final_score, ".\n"
+  ))
+}
+
+
+
+
+
+
+
+
+
+#' Submit exam
+#'
+#' @param x filename
+#'
+#' @export
+submit_my_exam <- function(x = 'tdp1718.R') {
+  rmarkdown::render(x, encoding = "UTF-8")
+  utils::browseURL(stringr::str_replace_all(x, "(.+)\\..+?$", "\\1\\.nb\\.html"))
 }
