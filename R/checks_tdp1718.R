@@ -270,14 +270,14 @@ tdp1718_check_8 <- function(df_name   = "death_ita",
     return(invisible(FALSE))
   }
 
-  to_check <- death_ita[-1]
+  to_check <- death_ita[-1] %>% as.data.frame()
   to_check[[ord_three]] <- as.integer(to_check[[ord_three]])
   to_check <- to_check[
     order(to_check[[ord_one]], to_check[[ord_two]], to_check[[ord_three]]),
     ]
 
   if (
-    all.equal(reference, to_check) &&
+    isTRUE(all.equal(reference, to_check)) &&
     setequal(
       levels(death_ita[[ord_three]]),
       c("neonato", "prescolare", "fanciullo")
