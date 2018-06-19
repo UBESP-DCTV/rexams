@@ -227,7 +227,7 @@ tdp1718_check_7 <- function() {
     nrow(max_perc_death) != 1 ||
     max_perc_death[['causa_del_decesso']] != 'prematurity' ||
     max_perc_death[['anno']] != 2000 ||
-    max_perc_death[['mesi']] != '0-1'
+    (!max_perc_death[['mesi']] %in% c('0-1', 'neonato')
   ) {
     message('Il risultato sembra non essere quello corretto...\n')
     return(invisible(FALSE))
