@@ -420,7 +420,6 @@ death_ita[["mesi"]] <- factor(death_ita[["mesi"]],
     labels = c("neonato", "prescolare", "fanciullo")
   )
 
-
 #'<!-- --------------------------------------------------------------------- -->
 #' Una volta completato il codice richiesto, eseguire la seguente istruzione
 #' (selezionarla e premere `CTRL + INVIO`).

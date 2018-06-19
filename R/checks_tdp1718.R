@@ -270,6 +270,20 @@ tdp1718_check_8 <- function(df_name   = "death_ita",
     return(invisible(FALSE))
   }
 
+  if (!is.data.frame(death_ita)) {
+    message("The main dataframe seams not to be a dataframe...\n")
+    return(invisible(FALSE))
+  }
+
+  if (any(
+    purrr::map_lgl(c(ord_one, ord_two, ord_three),
+      ~is.null(death_ita[[.]])
+    )
+  )) {
+    message("The main dataframe's variables seams not to be correct...\n")
+    return(invisible(FALSE))
+  }
+
   to_check <- death_ita[-1] %>% as.data.frame()
   to_check[[ord_three]] <- as.integer(to_check[[ord_three]])
   to_check <- to_check[
