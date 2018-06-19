@@ -162,7 +162,7 @@ tdp1718_check_4 <- function(main_df = death_ita) {
 #'
 #' @return logical (invisibly)
 #' @export
-tdp1718_check_5 <- function(text_var = "causa_del_decesso", .fun = tolower) {
+tdp1718_check_5 <- function(text_var = "causa_del_decesso", .fun = toupper) {
   if (all(
     death_ita[[text_var]] ==
     .fun(death_ita[[text_var]])
@@ -225,9 +225,9 @@ tdp1718_check_7 <- function() {
     return(invisible(FALSE))
   } else if (
     nrow(max_perc_death) != 1 ||
-    max_perc_death[['causa_del_decesso']] != 'prematurity' ||
+    max_perc_death[['causa_del_decesso']] != 'PREMATURITY' ||
     max_perc_death[['anno']] != 2000 ||
-    (!max_perc_death[['mesi']] %in% c('0-1', 'neonato')
+    (!max_perc_death[['mesi']] %in% c('0-1', 'neonato'))
   ) {
     message('Il risultato sembra non essere quello corretto...\n')
     return(invisible(FALSE))
@@ -369,7 +369,7 @@ tdp1718_check_9 <- function(matrix_name = "median_p_death_causes") {
 #' @return logical (invisibly)
 #' @export
 tdp1718_check_10 <- function() {
-  df_requested <- c('top_neo_2000', 'top_neo_2016')
+  df_requested <- c('bot_fan_2000', 'bot_fan_2016')
   df_ok <- purrr::map_lgl(df_requested, exists)
   df_provided <- df_requested[df_ok]
 
@@ -383,23 +383,23 @@ tdp1718_check_10 <- function() {
   score <- 0L
 
   try(silent = TRUE, {
-    if (!is.data.frame(top_neo_2000)) {
-      message('`top_neo_2000` sembra non essere un dataframe...\n')
+    if (!is.data.frame(bot_fan_2000)) {
+      message('`bot_fan_2000` sembra non essere un dataframe...\n')
       mark <- FALSE
     } else if (
-        top_neo_2000[['causa_del_decesso']][1:2] ==
-          c('prematurity', 'congenital_anomalies')          &&
+        bot_fan_2000[['causa_del_decesso']][1:2] ==
+          c('PERTUSSIS', 'TETANUS')          &&
 
-        top_neo_2000[['percentuale']][2:3] == c(28.7, 13.5) &&
+        bot_fan_2000[['percentuale']][2:3] == c(0.0, 0.0) &&
 
-        all(top_neo_2000[['anno']] == 2000)                 &&
+        all(bot_fan_2000[['anno']] == 2000)                 &&
 
-        all(top_neo_2000[['mesi']] %in% c('neonato', '0-1'))
+        all(bot_fan_2000[['mesi']] %in% c('fanciullo', '1-59'))
     ) {
-      message('`top_neo_2000` sembra essere corretto.\n')
+      message('`bot_fan_2000` sembra essere corretto.\n')
       mark <- TRUE
     } else {
-      message('`top_neo_2000` sembra non essere corretto...\n')
+      message('`bot_fan_2000` sembra non essere corretto...\n')
       mark <- FALSE
     }
 
@@ -412,23 +412,23 @@ tdp1718_check_10 <- function() {
 
   mark <- FALSE
   try(silent = TRUE, {
-    if (!is.data.frame(top_neo_2016)) {
-      message('`top_neo_2016` sembra non essere un dataframe...\n')
+    if (!is.data.frame(bot_fan_2016)) {
+      message('`bot_fan_2016` sembra non essere un dataframe...\n')
       mark <- FALSE
     } else if (
-      top_neo_2016[['causa_del_decesso']][1:2] ==
-      c('prematurity', 'congenital_anomalies')            &&
+      bot_fan_2016[['causa_del_decesso']][1:2] ==
+      c('HIV/AIDS', 'TETANUS')            &&
 
-      top_neo_2016[['percentuale']][2:3] == c(23.4, 21.7) &&
+      bot_fan_2016[['percentuale']][2:3] == c(0.0, 0.0) &&
 
-      all(top_neo_2016[['anno']] == 2016)                 &&
+      all(bot_fan_2016[['anno']] == 2016)                 &&
 
-      all(top_neo_2016[['mesi']]  %in% c('neonato', '0-1'))
+      all(bot_fan_2016[['mesi']]  %in% c('fanciullo', '1-59'))
     ) {
-      message('`top_neo_2016` sembra essere corretto.\n')
+      message('`bot_fan_2016` sembra essere corretto.\n')
       mark <- TRUE
     } else {
-      message('`top_neo_2016` sembra non essere corretto...\n')
+      message('`bot_fan_2016` sembra non essere corretto...\n')
       mark <- FALSE
     }
 
