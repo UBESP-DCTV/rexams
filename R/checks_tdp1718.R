@@ -260,9 +260,12 @@ tdp1718_check_8 <- function(df_name   = "death_ita",
   reference <- read.csv(
     system.file("exams/tdp1718/death_ita.csv", package = "rexams")
   )[-1]
-  reference[[ord_three]] <- as.integer(reference[[ord_three]])
+  reference[["mesi"]] <- factor(reference[["mesi"]],
+    levels = c("0-1", "2-59", "0-59"),
+    labels = c("neonato", "fanciullo", "prescolare")
+  )
   reference <- reference[
-    order(reference$percentuale, reference$anno, reference$mesi),
+    order(reference$percentuale, reference$anno, as.character(reference$mesi)),
   ]
 
   if (!exists(df_name)) {
@@ -285,11 +288,12 @@ tdp1718_check_8 <- function(df_name   = "death_ita",
   }
 
   to_check <- death_ita[-1] %>% as.data.frame()
-  to_check[[ord_three]] <- as.integer(to_check[[ord_three]])
   to_check <- to_check[
-    order(to_check[[ord_one]], to_check[[ord_two]], to_check[[ord_three]]),
+    order(to_check[[ord_one]], to_check[[ord_two]], as.character(to_check[[ord_three]])),
     ]
 
+  reference[['mesi']] <- as.character(reference[['mesi']])
+  to_check[['mesi']]  <- as.character(to_check[['mesi']])
   if (
     isTRUE(all.equal(reference, to_check)) &&
     setequal(
