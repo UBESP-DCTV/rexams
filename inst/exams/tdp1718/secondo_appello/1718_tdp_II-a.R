@@ -627,6 +627,7 @@ message("
 #' (selezionarla e premere `CTRL + INVIO`) per avere una stima del punteggio
 #' totale ottenuto.
 #'
+mia_soluzione
 controlla_esame(mia_soluzione)
 #'<!-- ===================================================================== -->
 

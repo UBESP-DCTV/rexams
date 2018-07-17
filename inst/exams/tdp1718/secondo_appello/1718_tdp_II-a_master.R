@@ -191,9 +191,9 @@ mia_soluzione <- soluzione()
 #' all'indirizzo richiesto. Dopodiché, passare alla domanda seguente.
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
-    domanda  = 1,
-    risposta = getwd()
-  )
+  domanda  = 1,
+  risposta = getwd()
+)
 
 controlla_risposta(mia_soluzione, 1)
 #'<!-- ===================================================================== -->
@@ -235,7 +235,7 @@ death_ita <- read.csv("death_ita.csv", stringsAsFactors = FALSE)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 2,
-  risposta = death_ita
+  risposta = if (exists("death_ita", inherits = FALSE)) death_ita else NULL
 )
 
 controlla_risposta(mia_soluzione, 2)
@@ -284,12 +284,21 @@ nomi_colonne   <- colnames(death_ita)
 #' (selezionarla e premere `CTRL + INVIO`).
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
-  domanda  = 3,
-  risposta = list(
-    numero_righe   = numero_righe,
-    numero_colonne = numero_colonne,
-    nomi_colonne   = nomi_colonne
-  )
+   domanda  = 3,
+   risposta = if (any(
+     purrr::map_lgl(
+       c("numero_righe", "numero_colonne", "nomi_colonne"),
+       exists, inherits = FALSE
+     )
+   )) {
+     list(
+       numero_righe   = if (exists("numero_righe", inherits = FALSE)) numero_righe else NULL,
+       numero_colonne = if (exists("numero_colonne", inherits = FALSE)) numero_colonne else NULL,
+       nomi_colonne   = if (exists("nomi_colonne", inherits = FALSE)) nomi_colonne else NULL
+     )
+   } else {
+     NULL
+   }
 )
 
 controlla_risposta(mia_soluzione, 3)
@@ -326,7 +335,7 @@ colnames(death_ita)[[1]] <- 'causa_del_decesso'
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 4,
-  risposta = death_ita
+  risposta = if (exists("death_ita", inherits = FALSE)) death_ita else NULL
 )
 
 controlla_risposta(mia_soluzione, 4)
@@ -363,7 +372,7 @@ death_ita[[1]] <- tolower(death_ita[[1]])
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 5,
-  risposta = death_ita
+  risposta = if (exists("death_ita", inherits = FALSE)) death_ita else NULL
 )
 
 controlla_risposta(mia_soluzione, 5)
@@ -398,7 +407,7 @@ causa_del_decesso <- gsub(" ", "", death_ita[[1]])
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 6,
-  risposta = death_ita
+  risposta = if (exists("death_ita", inherits = FALSE)) death_ita else NULL
 )
 
 controlla_risposta(mia_soluzione, 6)
@@ -438,7 +447,7 @@ pos_perc_death <- death_ita[death_ita$percentuale > 0, ]
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 7,
-  risposta = pos_perc_death
+  risposta = if (exists("pos_perc_death", inherits = FALSE)) pos_perc_death else NULL
 )
 
 controlla_risposta(mia_soluzione, 7)
@@ -483,7 +492,7 @@ death_ita[["mesi"]] <- factor(death_ita[["mesi"]],
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 8,
-  risposta = death_ita
+  risposta = if (exists("death_ita", inherits = FALSE)) death_ita else NULL
 )
 
 controlla_risposta(mia_soluzione, 8)
@@ -531,7 +540,7 @@ median_p_death_causes <- tapply(
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 9,
-  risposta = median_p_death_causes
+  risposta = if (exists("max_p_death_causes", inherits = FALSE)) max_p_death_causes else NULL
 )
 
 controlla_risposta(mia_soluzione, 9)
@@ -568,11 +577,20 @@ top_fan_2016 <- topdown[topdown$mesi == 'neonato' & topdown$anno == 2016, ]
 #' (selezionarla e premere `CTRL + INVIO`).
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
-  domanda  = 10,
-  risposta = list(
-    top_fan_2000 = if (exists("top_fan_2000")) top_fan_2000 else NULL,
-    top_fan_2016 = if (exists("top_fan_2016")) top_fan_2016 else NULL
-  )
+   domanda  = 10,
+   risposta = if (any(
+     purrr::map_lgl(
+       c("top_fan_2000", "top_fan_2016"),
+       exists, inherits = FALSE
+     )
+   )){
+     list(
+       top_fan_2000 = if (exists("top_fan_2000", inherits = FALSE)) top_fan_2000 else NULL,
+       top_fan_2016 = if (exists("top_fan_2016", inherits = FALSE)) top_fan_2016 else NULL
+     )
+   } else{
+     NULL
+   }
 )
 
 controlla_risposta(mia_soluzione, 10)
@@ -657,6 +675,7 @@ message("
 #' (selezionarla e premere `CTRL + INVIO`) per avere una stima del punteggio
 #' totale ottenuto.
 #'
+mia_soluzione
 controlla_esame(mia_soluzione)
 #'<!-- ===================================================================== -->
 
