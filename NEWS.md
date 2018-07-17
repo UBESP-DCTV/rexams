@@ -1,3 +1,15 @@
+# rexams 0.1.2
+
+* Updated `score()` to return an integer.
+* Added `aggiungi_risposta()` to add an answer to the solution of an exam
+* Added `soluzione()` as a costructor for object with two class: `rexams` and
+        a class named as the exams provided (this to be able to create new
+        checks and exams without damage the other)
+* Added `controlla_risposta` e `controla esame` as generics and methods to check
+        any exams
+* Added `tdp_2018_2_a_checks` with the checks for the second exam provided
+* Added `1718_tdp_II-a.R` with the second exam provided
+ 
 # rexams 0.0.5
 
 * Added `score()` function to score a single assignment
