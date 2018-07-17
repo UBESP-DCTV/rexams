@@ -4,12 +4,10 @@
 \alias{tdp_2018_2_a_check_2}
 \title{tdp 2018, appello 2, tema a, check 2}
 \usage{
-tdp_2018_2_a_check_2(provided_names = NULL, required_names = "death_ita")
+tdp_2018_2_a_check_2(main_data)
 }
 \arguments{
-\item{provided_names}{names included in the workspace}
-
-\item{required_names}{variable'names required}
+\item{main_data}{main data.frame}
 }
 \value{
 logical (invisibly)
