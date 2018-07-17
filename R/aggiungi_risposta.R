@@ -19,6 +19,12 @@
 #' esame_corrado
 aggiungi_risposta <- function(a, domanda, risposta) {
 
+  if (is.null(risposta)){
+    a[domanda] <- a[domanda]
+    names(a)[seq_len(domanda)] <- paste0("R", seq_len(domanda))
+    return(a)
+  }
+
   a[domanda][[1]] <- risposta
   names(a)[seq_len(domanda)] <- paste0("R", seq_len(domanda))
   a

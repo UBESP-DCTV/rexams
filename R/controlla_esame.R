@@ -22,9 +22,7 @@ controlla_esame.default <- function(soluzione) {
 controlla_esame.tdp_2018_2_a <- function(soluzione) {
 
   purrr::map_int(seq_along(mia_soluzione),
-    ~eval(parse(
-      text = paste0("invisible(tdp_2018_2_a_check_", .x, "(soluzione[[", .x, "]]))")
-    ))
+    ~controlla_risposta(soluzione, .)
   ) %>%
     sum()
 }

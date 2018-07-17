@@ -42,7 +42,7 @@ controlla_risposta.tdp_2018_2_a <- function(soluzione, domanda) {
   } else if (domanda == 10 && check_esiste(soluzione, 10)) {
     tdp_2018_2_a_check_10(soluzione[[10]])
   } else {
-    message(paste0("domanda o risposta ", domanda, " non presente nell'esame."))
+    message(paste0("domanda/risposta ", domanda, " non presente nell'esame/soluzione."))
     return(invisible(0L))
   }
 }
