@@ -235,7 +235,7 @@ death_ita <- read.csv("death_ita.csv", stringsAsFactors = FALSE)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 2,
-  risposta = ls()
+  risposta = death_ita
 )
 
 controlla_risposta(mia_soluzione, 2)
@@ -657,7 +657,7 @@ message("
 #' (selezionarla e premere `CTRL + INVIO`) per avere una stima del punteggio
 #' totale ottenuto.
 #'
-score_my_exam()
+controlla_esame(mia_soluzione)
 #'<!-- ===================================================================== -->
 
 

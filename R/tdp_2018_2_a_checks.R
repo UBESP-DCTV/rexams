@@ -35,40 +35,24 @@ tdp_2018_2_a_check_1 <- function(wd = getwd(), file_to_check = "death_ita.csv"){
 
 #' tdp 2018, appello 2, tema a, check 2
 #'
-#' @param provided_names names included in the workspace
-#' @param required_names variable'names required
+#' @param main_data main data.frame
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_2 <- function(
-  provided_names = NULL,
-  required_names = "death_ita"
-) {
-  if (is.null(provided_names)) {
-    names_ok <- exists(required_names, envir = parent.frame(), inherits = FALSE)
-  } else {
-    names_ok <- required_names %in% provided_names
-  }
-  if (!all(names_ok)) {
-    message(paste0(
-      "L'oggetto richiesto '", required_names[!names_ok], "' manca."
-    ))
-    return(invisible(FALSE))
-  }
-
+tdp_2018_2_a_check_2 <- function(main_data) {
+  if (is_null(main_data)) return(invisible(0L))
   if (
-    is.data.frame(death_ita) &&
-    all(dim(death_ita) == c(765L, 4L))      &&
+    is.data.frame(main_data) &&
+    all(dim(main_data) == c(765L, 4L))      &&
     (
-      all(purrr::map_chr(death_ita, class) == c('character', 'numeric', 'integer', 'character')) ||
-      all(purrr::map_chr(death_ita, class) == c('factor', 'numeric', 'integer', 'factor'))
+      all(purrr::map_chr(main_data, class) == c('character', 'numeric', 'integer', 'character'))
     )
   ) {
     message('La base di dati sembra importata correttamente.\n')
-    return(invisible(TRUE))
+    return(invisible(1L))
   } else {
     message('La base di dati non sembra importata correttamente...\n')
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
 }
 
@@ -89,6 +73,7 @@ tdp_2018_2_a_check_2 <- function(
 #' @export
 tdp_2018_2_a_check_3 <- function(data, reference) {
 
+  if (is.null(data)) return(invisible(0L))
   required_names <- c("numero_righe", "numero_colonne", "nomi_colonne")
   names_ok <- purrr::map_lgl(required_names, exists)
 
@@ -96,7 +81,7 @@ tdp_2018_2_a_check_3 <- function(data, reference) {
     message(paste0(
       "La variabile richiesta '", required_names[!names_ok], "' manca.\n"
     ))
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
 
   message(paste0(
@@ -112,10 +97,10 @@ tdp_2018_2_a_check_3 <- function(data, reference) {
     setequal(nomi_colonne, c("cause_of_death", "percentuale", "anno", "mesi" ))
   ) {
     message('Le risposte sembrano essere tutte corrette.\n')
-    return(invisible(TRUE))
+    return(invisible(1L))
   } else {
     message('Almeno una risposta sembra non essere corretta...\n')
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
 }
 
@@ -138,19 +123,19 @@ tdp_2018_2_a_check_4 <- function(main_df) {
     message(
       'la colonna `cause_of_death` sembra essere ancora presente nel dataset.\n'
     )
-    return(invisible(FALSE))
+    return(invisible(-1L))
   } else if (
     !'causa_del_decesso' %in% colnames(main_df)
   ) {
     message(
       'la colonna `causa_del_decesso` non sembra presente nel dataset.\n'
     )
-    return(invisible(FALSE))
+    return(invisible(-1L))
   } else {
     message(
       "L'esercizio sembra essere corretto.\n"
     )
-    return(invisible(TRUE))
+    return(invisible(1L))
   }
 }
 
@@ -181,17 +166,17 @@ tdp_2018_2_a_check_5 <- function(main_df, .fun = tolower
   if (is.null(main_df[["causa_del_decesso"]])) {
     message("L'esercizio non sembra essere corretto...\n")
     message("variabile causa_del_decesso non presente nel dataset")
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
   if (all(
     main_df[["causa_del_decesso"]] ==
     .fun(read.csv("death_ita.csv", stringsAsFactors = FALSE)[["cause_of_death"]])
   )) {
     message("L'esercizio sembra essere corretto.\n")
-    return(invisible(TRUE))
+    return(invisible(1L))
   } else {
     message("L'esercizio non sembra essere corretto...\n")
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
 }
 
@@ -218,7 +203,7 @@ tdp_2018_2_a_check_6 <- function(main_df, new_value = '') {
   if (is.null(main_df[["causa_del_decesso"]])) {
     message("L'esercizio non sembra essere corretto...\n")
     message("variabile causa_del_decesso non presente nel dataset")
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
   if (all(
     tolower(main_df[["causa_del_decesso"]]) ==
@@ -227,10 +212,10 @@ tdp_2018_2_a_check_6 <- function(main_df, new_value = '') {
     ))
   )) {
     message("L'esercizio sembra essere corretto.\n")
-    return(invisible(TRUE))
+    return(invisible(1L))
   } else {
     message("L'esercizio non sembra essere corretto...\n")
-    return(invisible(FALSE))
+    return(invisible(-1L))
   }
 }
 
@@ -255,18 +240,18 @@ tdp_2018_2_a_check_6 <- function(main_df, new_value = '') {
 #' @export
 tdp_2018_2_a_check_7 <- function(main_df) {
   if (
-    all.equal(
+    isTRUE(all.equal(
       main_df[["percentuale"]],
       read.csv("death_ita.csv", stringsAsFactors = FALSE) %>%
         `[[`("percentuale") %>%
         `[`(. > 0)
     )
-  ){
+  )){
     message('Il risultato sembra corretto.\n')
-    return(invisible(TRUE))
+    return(invisible(2L))
   } else {
     message('Il risultato sembra non essere quello corretto...\n')
-    return(invisible(FALSE))
+    return(invisible(-2L))
   }
 }
 
@@ -299,14 +284,14 @@ tdp_2018_2_a_check_8 <- function(main_df,
 
   if (!is.data.frame(main_df)) {
     message("The object provided seams not to be a dataframe...\n")
-    return(invisible(FALSE))
+    return(invisible(-2L))
   }
 
   if (any(
     purrr::map_lgl(c(ord_one, ord_two, ord_three), ~is.null(main_df[[.]]))
   )) {
     message("The main dataframe's variables seams not to be correct...\n")
-    return(invisible(FALSE))
+    return(invisible(-2L))
   }
 
   to_check <- main_df[-1] %>% as.data.frame()
@@ -324,10 +309,10 @@ tdp_2018_2_a_check_8 <- function(main_df,
     )
   ) {
     message('Il risultato sembra essere quello corretto.\n')
-    return(invisible(TRUE))
+    return(invisible(2L))
   } else {
     message('Il risultato non sembra essere quello corretto...\n')
-    return(invisible(FALSE))
+    return(invisible(-2L))
   }
 }
 
@@ -346,7 +331,7 @@ tdp_2018_2_a_check_8 <- function(main_df,
 tdp_2018_2_a_check_9 <- function(main_table) {
   if (!is.matrix(main_table)) {
     message("L'oggetto fornito sembra non essere una tabella/matrice.\n")
-    return(invisible(FALSE))
+    return(invisible(-2L))
   }
 
   ref <- read.csv("death_ita.csv", stringsAsFactors = FALSE)
@@ -374,10 +359,10 @@ tdp_2018_2_a_check_9 <- function(main_table) {
 
   if (all(reference == to_check)) {
     message('Il risultato sembra essere quello corretto.\n')
-    return(invisible(TRUE))
+    return(invisible(2L))
   } else {
     message('Il risultato non sembra essere quello corretto...\n')
-    return(invisible(FALSE))
+    return(invisible(-2L))
   }
 }
 

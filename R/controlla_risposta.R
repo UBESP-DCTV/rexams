@@ -1,14 +1,26 @@
-controlla_risposta <- function(soluzione, domanda, ...) {
+#' controlla risposta
+#'
+#' @param soluzione an object of class rexams
+#' @param domanda the number of question to check
+#'
+#' @return a the output of the test
+#' @export
+controlla_risposta <- function(soluzione, domanda) {
   UseMethod("controlla_risposta")
 }
 
-controlla_risposta.default <- function(soluzione, domanda, ...) {
-  stop("Qualcosa non va", call. = FALSE)
+#' @describeIn controlla_risposta default methods
+#' @inheritParams controlla_risposta
+#' @export
+controlla_risposta.default <- function(soluzione, domanda) {
+  stop("Qualcosa non va, contatta un responsabile", call. = FALSE)
 }
 
 
-controlla_risposta.tdp_2018_2_a <- function(soluzione, domanda, ...
-) {
+#' @describeIn controlla_risposta default methods
+#' @inheritParams controlla_risposta
+#' @export
+controlla_risposta.tdp_2018_2_a <- function(soluzione, domanda) {
   if (domanda == 1 && check_esiste(soluzione, 1)) {
     tdp_2018_2_a_check_1(soluzione[[1]])
   } else if (domanda == 2 && check_esiste(soluzione, 2)) {
@@ -30,8 +42,7 @@ controlla_risposta.tdp_2018_2_a <- function(soluzione, domanda, ...
   } else if (domanda == 10 && check_esiste(soluzione, 10)) {
     tdp_2018_2_a_check_10(soluzione[[10]])
   } else {
-    stop(paste0("domanda o risposta ", domanda, " non presente nell'esame."),
-      call. = FALSE
-    )
+    message(paste0("domanda o risposta ", domanda, " non presente nell'esame."))
+    return(invisible(0L))
   }
 }

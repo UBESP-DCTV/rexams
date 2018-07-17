@@ -4,7 +4,7 @@
 \alias{tdp1718_check_5}
 \title{tdp check 5}
 \usage{
-tdp1718_check_5(text_var = "causa_del_decesso", .fun = tolower)
+tdp1718_check_5(text_var = "causa_del_decesso", .fun = toupper)
 }
 \arguments{
 \item{text_var}{\link{chr} name of the variable to transform}
