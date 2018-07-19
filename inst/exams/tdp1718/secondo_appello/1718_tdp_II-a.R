@@ -283,7 +283,7 @@ mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
      )
    )) {
      list(
-       numero_righe   = if (exists("numero_righe", inherits = FALSE, envir = globalenv()) numero_righe else NULL,
+       numero_righe   = if (exists("numero_righe", inherits = FALSE, envir = globalenv())) numero_righe else NULL,
        numero_colonne = if (exists("numero_colonne", inherits = FALSE, envir = globalenv())) numero_colonne else NULL,
        nomi_colonne   = if (exists("nomi_colonne", inherits = FALSE, envir = globalenv())) nomi_colonne else NULL
     )
