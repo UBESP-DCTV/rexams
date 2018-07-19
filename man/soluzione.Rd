@@ -2,6 +2,7 @@
 % Please edit documentation in R/soluzione.R
 \name{soluzione}
 \alias{soluzione}
+\alias{print.rexam}
 \title{Costructor for solution objects}
 \usage{
 soluzione(candidato = list(nome = getOption("rexam_nome_candidato"), cognome =
@@ -9,6 +10,8 @@ soluzione(candidato = list(nome = getOption("rexam_nome_candidato"), cognome =
   getOption("rexam_matricola_candidato")), corso = getOption("rexam_corso"),
   anno = getOption("rexam_anno"), appello = getOption("rexam_appello"),
   tema = getOption("rexam_id_tema"))
+
+\method{print}{rexam}(x, ...)
 }
 \arguments{
 \item{candidato}{\link{named list} contenente il nome, cognome e mat del
@@ -21,13 +24,24 @@ candidato}
 \item{appello}{\link{int} numero appello}
 
 \item{tema}{\link{chr} id del tema d'esame}
+
+\item{x}{a rexam object}
+
+\item{...}{further option for the function print}
 }
 \value{
 an object of class "<corso>\emph{<anno>}<appello>_<tema>"
+
+invisibly x
 }
 \description{
 Costructor for solution objects
 }
+\section{Methods (by generic)}{
+\itemize{
+\item \code{print}: print method for rexam objects
+}}
+
 \examples{
 esame_corrado <- soluzione(
   candidato = list(nome = "Corrado", cognome = "Lanera", mat = 1234),

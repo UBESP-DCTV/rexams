@@ -43,6 +43,12 @@ soluzione <- function(
   ))
 }
 
+#' @describeIn soluzione print method for rexam objects
+#' @param x a rexam object
+#' @param ... further option for the function print
+#'
+#' @return invisibly x
+#' @export
 print.rexam <- function(x, ...) {
   cli::cat_line(
     crayon::blue("Esame per il corso di"), ": ", attr(x, "corso"),
@@ -60,4 +66,5 @@ print.rexam <- function(x, ...) {
     cli::cat_bullet(crayon::cyan(names(x)[[answer]]))
     cli::cat_line(str(x[[answer]]))
   }
+  invisible(x)
 }

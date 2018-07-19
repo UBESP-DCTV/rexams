@@ -136,7 +136,6 @@
 
 #+ package_loading, include = FALSE
 library(rexams)
-library(lattice)
 
 
 #+ setup_exam, include = FALSE
