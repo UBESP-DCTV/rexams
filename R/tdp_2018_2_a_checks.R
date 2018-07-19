@@ -40,7 +40,7 @@ tdp_2018_2_a_check_1 <- function(wd = getwd(), file_to_check = "death_ita.csv"){
 #' @return logical (invisibly)
 #' @export
 tdp_2018_2_a_check_2 <- function(main_data) {
-  if (is_null(main_data)) return(invisible(0L))
+  if (purrr::is_null(main_data)) return(invisible(0L))
   if (
     is.data.frame(main_data) &&
     all(dim(main_data) == c(765L, 4L))      &&
