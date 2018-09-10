@@ -5,10 +5,11 @@
 \alias{print.rexam}
 \title{Costructor for solution objects}
 \usage{
-soluzione(candidato = list(nome = getOption("rexam_nome_candidato"), cognome =
-  getOption("rexam_cognome_candidato"), mat =
-  getOption("rexam_matricola_candidato")), corso = getOption("rexam_corso"),
-  anno = getOption("rexam_anno"), appello = getOption("rexam_appello"),
+soluzione(candidato = list(nome = getOption("rexam_nome_candidato"),
+  cognome = getOption("rexam_cognome_candidato"), mat =
+  getOption("rexam_matricola_candidato")),
+  corso = getOption("rexam_corso"), anno = getOption("rexam_anno"),
+  appello = getOption("rexam_appello"),
   tema = getOption("rexam_id_tema"))
 
 \method{print}{rexam}(x, ...)

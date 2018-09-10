@@ -4,6 +4,8 @@
 \alias{controlla_risposta}
 \alias{controlla_risposta.default}
 \alias{controlla_risposta.tdp_2018_2_a}
+\alias{controlla_risposta.tdp_2018_3_a}
+\alias{controlla_risposta.tdp_2018_3_b}
 \title{controlla risposta}
 \usage{
 controlla_risposta(soluzione, domanda)
@@ -11,6 +13,10 @@ controlla_risposta(soluzione, domanda)
 \method{controlla_risposta}{default}(soluzione, domanda)
 
 \method{controlla_risposta}{tdp_2018_2_a}(soluzione, domanda)
+
+\method{controlla_risposta}{tdp_2018_3_a}(soluzione, domanda)
+
+\method{controlla_risposta}{tdp_2018_3_b}(soluzione, domanda)
 }
 \arguments{
 \item{soluzione}{an object of class rexams}
@@ -27,6 +33,10 @@ controlla risposta
 \itemize{
 \item \code{default}: default methods
 
-\item \code{tdp_2018_2_a}: default methods
+\item \code{tdp_2018_2_a}: tdp_2018_2_a methods
+
+\item \code{tdp_2018_3_a}: tdp_2018_3_a methods
+
+\item \code{tdp_2018_3_b}: tdp_2018_3_b methods
 }}
 

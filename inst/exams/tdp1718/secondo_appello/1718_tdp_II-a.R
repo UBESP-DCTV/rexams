@@ -151,7 +151,7 @@ options(
 )
 
 mia_soluzione <- soluzione()
-
+mia_soluzione
 
 
 
@@ -233,7 +233,7 @@ controlla_risposta(mia_soluzione, 1)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 2,
-  risposta = if (exists("death_ita", inherits = FALSE, envir = globalenv())) death_ita else NULL
+  risposta = possibile_risposta(death_ita)
 )
 
 controlla_risposta(mia_soluzione, 2)
@@ -283,9 +283,9 @@ mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
      )
    )) {
      list(
-       numero_righe   = if (exists("numero_righe", inherits = FALSE, envir = globalenv())) numero_righe else NULL,
-       numero_colonne = if (exists("numero_colonne", inherits = FALSE, envir = globalenv())) numero_colonne else NULL,
-       nomi_colonne   = if (exists("nomi_colonne", inherits = FALSE, envir = globalenv())) nomi_colonne else NULL
+       numero_righe   = possibile_risposta(numero_righe),
+       numero_colonne = possibile_risposta(numero_colonne),
+       nomi_colonne   = possibile_risposta(nomi_colonne)
     )
    } else {
     NULL
@@ -325,7 +325,7 @@ controlla_risposta(mia_soluzione, 3)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 4,
-  risposta = if (exists("death_ita", inherits = FALSE, envir = globalenv())) death_ita else NULL
+  risposta = possibile_risposta(death_ita)
 )
 
 controlla_risposta(mia_soluzione, 4)
@@ -361,7 +361,7 @@ controlla_risposta(mia_soluzione, 4)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 5,
-  risposta = if (exists("death_ita", inherits = FALSE, envir = globalenv())) death_ita else NULL
+  risposta = possibile_risposta(death_ita)
 )
 
 controlla_risposta(mia_soluzione, 5)
@@ -393,7 +393,7 @@ controlla_risposta(mia_soluzione, 5)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 6,
-  risposta = if (exists("death_ita", inherits = FALSE, envir = globalenv())) death_ita else NULL
+  risposta = possibile_risposta(death_ita)
 )
 
 controlla_risposta(mia_soluzione, 6)
@@ -432,7 +432,7 @@ controlla_risposta(mia_soluzione, 6)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 7,
-  risposta = if (exists("pos_perc_death", inherits = FALSE, envir = globalenv())) pos_perc_death else NULL
+  risposta = possibile_risposta(pos_perc_death)
   )
 
 controlla_risposta(mia_soluzione, 7)
@@ -473,7 +473,7 @@ controlla_risposta(mia_soluzione, 7)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 8,
-  risposta = if (exists("death_ita", inherits = FALSE, envir = globalenv())) death_ita else NULL
+  risposta = possibile_risposta(death_ita)
 )
 
 controlla_risposta(mia_soluzione, 8)
@@ -515,9 +515,8 @@ controlla_risposta(mia_soluzione, 8)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 9,
-  risposta = if (exists("max_p_death_causes", inherits = FALSE, envir = globalenv())) max_p_death_causes else NULL
+  risposta = possibile_risposta(max_p_death_causes)
 )
-
 controlla_risposta(mia_soluzione, 9)
 #'<!-- ===================================================================== -->
 
@@ -555,8 +554,8 @@ mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
     )
   )){
     list(
-      top_fan_2000 = if (exists("top_fan_2000", inherits = FALSE, envir = globalenv())) top_fan_2000 else NULL,
-      top_fan_2016 = if (exists("top_fan_2016", inherits = FALSE, envir = globalenv())) top_fan_2016 else NULL
+      top_fan_2000 = possibile_risposta(top_fan_2000),
+      top_fan_2016 = possibile_risposta(top_fan_2016)
     )
   } else{
     NULL

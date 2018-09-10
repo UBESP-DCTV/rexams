@@ -235,7 +235,7 @@ death_ita <- read.csv("death_ita.csv", stringsAsFactors = FALSE)
 #'
 mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
   domanda  = 2,
-  risposta = if (exists("death_ita", inherits = FALSE)) death_ita else NULL
+  risposta = possibile_risposta(death_ita)
 )
 
 controlla_risposta(mia_soluzione, 2)
@@ -292,9 +292,9 @@ mia_soluzione <- aggiungi_risposta(a = mia_soluzione,
      )
    )) {
      list(
-       numero_righe   = if (exists("numero_righe", inherits = FALSE)) numero_righe else NULL,
-       numero_colonne = if (exists("numero_colonne", inherits = FALSE)) numero_colonne else NULL,
-       nomi_colonne   = if (exists("nomi_colonne", inherits = FALSE)) nomi_colonne else NULL
+       numero_righe   = possibile_risposta(numero_righe),
+       numero_colonne = possibile_risposta(numero_colonne),
+       nomi_colonne   = possibile_risposta(nomi_colonne)
      )
    } else {
      NULL

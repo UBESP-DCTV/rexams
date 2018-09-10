@@ -4,6 +4,8 @@
 \alias{controlla_esame}
 \alias{controlla_esame.default}
 \alias{controlla_esame.tdp_2018_2_a}
+\alias{controlla_esame.tdp_2018_3_a}
+\alias{controlla_esame.tdp_2018_3_b}
 \title{controlla esame intero}
 \usage{
 controlla_esame(soluzione)
@@ -11,6 +13,10 @@ controlla_esame(soluzione)
 \method{controlla_esame}{default}(soluzione)
 
 \method{controlla_esame}{tdp_2018_2_a}(soluzione)
+
+\method{controlla_esame}{tdp_2018_3_a}(soluzione)
+
+\method{controlla_esame}{tdp_2018_3_b}(soluzione)
 }
 \arguments{
 \item{soluzione}{an object of class rexams}
@@ -25,6 +31,10 @@ controlla esame intero
 \itemize{
 \item \code{default}: default methods
 
-\item \code{tdp_2018_2_a}: default methods
+\item \code{tdp_2018_2_a}: tdp_2018_2_a methods
+
+\item \code{tdp_2018_3_a}: tdp_2018_3_a methods
+
+\item \code{tdp_2018_3_b}: tdp_2018_3_a methods
 }}
 

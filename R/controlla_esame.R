@@ -16,7 +16,7 @@ controlla_esame.default <- function(soluzione) {
 }
 
 
-#' @describeIn controlla_esame default methods
+#' @describeIn controlla_esame tdp_2018_2_a methods
 #' @inheritParams controlla_esame
 #' @export
 controlla_esame.tdp_2018_2_a <- function(soluzione) {
@@ -26,3 +26,27 @@ controlla_esame.tdp_2018_2_a <- function(soluzione) {
   ) %>%
     sum()
 }
+
+
+#' @describeIn controlla_esame tdp_2018_3_a methods
+#' @inheritParams controlla_esame
+#' @export
+controlla_esame.tdp_2018_3_a <- function(soluzione) {
+
+  purrr::map_int(seq_along(mia_soluzione),
+    ~controlla_risposta(soluzione, .)
+  ) %>%
+    sum()
+}
+
+#' @describeIn controlla_esame tdp_2018_3_a methods
+#' @inheritParams controlla_esame
+#' @export
+controlla_esame.tdp_2018_3_b <- function(soluzione) {
+
+  purrr::map_int(seq_along(mia_soluzione),
+    ~controlla_risposta(soluzione, .)
+  ) %>%
+    sum()
+}
+

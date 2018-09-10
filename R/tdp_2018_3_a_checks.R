@@ -1,11 +1,11 @@
-#' tdp 2018, appello 2, tema a, check 1
+#' tdp 2018, appello 3, tema a, check 1
 #'
 #' @param wd [chr] working directory
 #' @param file_to_check [chr] path of a file to check into the wd
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_1 <- function(wd = getwd(), file_to_check = "death_ita.csv"){
+tdp_2018_3_a_check_1 <- function(wd = getwd(), file_to_check = "death_ita.csv"){
 
   old_wd <- setwd(wd)
   on.exit(setwd(old_wd), add = TRUE)
@@ -33,20 +33,20 @@ tdp_2018_2_a_check_1 <- function(wd = getwd(), file_to_check = "death_ita.csv"){
 
 
 
-#' tdp 2018, appello 2, tema a, check 2
+#' tdp 2018,appello 3, tema a, check 2
 #'
 #' @param main_data main data.frame
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_2 <- function(main_data) {
+tdp_2018_3_a_check_2 <- function(main_data) {
   if (purrr::is_null(main_data)) return(invisible(0L))
   if (
     is.data.frame(main_data) &&
-    all(dim(main_data) == c(765L, 4L))      &&
-    (
-      all(purrr::map_chr(main_data, class) == c('character', 'numeric', 'integer', 'character'))
-    )
+      all(dim(main_data) == c(765L, 4L))      &&
+      (
+        all(purrr::map_chr(main_data, class) == c('character', 'numeric', 'integer', 'character'))
+      )
   ) {
     message('La base di dati sembra importata correttamente.\n')
     return(invisible(1L))
@@ -64,14 +64,14 @@ tdp_2018_2_a_check_2 <- function(main_data) {
 
 
 
-#' tdp 2018, appello 2, tema a, check 3
+#' tdp 2018,appello 3, tema a, check 3
 #'
 #' @param data a list of data to check
 #' @param reference a list of real data
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_3 <- function(data, reference) {
+tdp_2018_3_a_check_3 <- function(data, reference) {
   required_names <- c("numero_righe", "numero_colonne", "nomi_colonne")
   names_ok <- purrr::map_lgl(required_names, exists)
 
@@ -91,8 +91,8 @@ tdp_2018_2_a_check_3 <- function(data, reference) {
 
   if (
     numero_righe   == 765 &&
-    numero_colonne == 4   &&
-    setequal(nomi_colonne, c("cause_of_death", "percentuale", "anno", "mesi" ))
+      numero_colonne == 4   &&
+      setequal(nomi_colonne, c("cause_of_death", "percentuale", "anno", "mesi" ))
   ) {
     message('Le risposte sembrano essere tutte corrette.\n')
     return(invisible(1L))
@@ -110,13 +110,13 @@ tdp_2018_2_a_check_3 <- function(data, reference) {
 
 
 
-#' tdp 2018, appello 2, tema a, check 4
+#' tdp 2018,appello 3, tema a, check 4
 #'
 #' @param main_df a data.frame
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_4 <- function(main_df) {
+tdp_2018_3_a_check_4 <- function(main_df) {
   if ('cause_of_death' %in% colnames(main_df)) {
     message(
       'la colonna `cause_of_death` sembra essere ancora presente nel dataset.\n'
@@ -150,7 +150,7 @@ tdp_2018_2_a_check_4 <- function(main_df) {
 
 
 
-#' tdp 2018, appello 2, tema a, check 5
+#' tdp 2018,appello 3, tema a, check 5
 #'
 #' @param text_var [chr] name of the variable to transform
 #' @param .fun the function requested for the transformation. Note, the
@@ -159,7 +159,7 @@ tdp_2018_2_a_check_4 <- function(main_df) {
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_5 <- function(main_df, .fun = tolower
+tdp_2018_3_a_check_5 <- function(main_df, .fun = tolower
 ) {
   if (is.null(main_df[["causa_del_decesso"]])) {
     message("L'esercizio non sembra essere corretto...\n")
@@ -168,7 +168,7 @@ tdp_2018_2_a_check_5 <- function(main_df, .fun = tolower
   }
   if (all(
     main_df[["causa_del_decesso"]] ==
-    .fun(read.csv("death_ita.csv", stringsAsFactors = FALSE)[["cause_of_death"]])
+      .fun(read.csv("death_ita.csv", stringsAsFactors = FALSE)[["cause_of_death"]])
   )) {
     message("L'esercizio sembra essere corretto.\n")
     return(invisible(1L))
@@ -190,14 +190,14 @@ tdp_2018_2_a_check_5 <- function(main_df, .fun = tolower
 
 
 
-#' tdp 2018, appello 2, tema a, check 6
+#' tdp 2018,appello 3, tema a, check 6
 #'
 #' @param main_df [data.frame] main dataframe
 #' @param new_value [chr] character used to substitute the white spaces
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_6 <- function(main_df, new_value = '') {
+tdp_2018_3_a_check_6 <- function(main_df, new_value = '') {
   if (is.null(main_df[["causa_del_decesso"]])) {
     message("L'esercizio non sembra essere corretto...\n")
     message("variabile causa_del_decesso non presente nel dataset")
@@ -205,9 +205,9 @@ tdp_2018_2_a_check_6 <- function(main_df, new_value = '') {
   }
   if (all(
     tolower(main_df[["causa_del_decesso"]]) ==
-    tolower(gsub(" ", new_value,
-      read.csv("death_ita.csv", stringsAsFactors = FALSE)[["cause_of_death"]]
-    ))
+      tolower(gsub(" ", new_value,
+        read.csv("death_ita.csv", stringsAsFactors = FALSE)[["cause_of_death"]]
+      ))
   )) {
     message("L'esercizio sembra essere corretto.\n")
     return(invisible(1L))
@@ -230,13 +230,13 @@ tdp_2018_2_a_check_6 <- function(main_df, new_value = '') {
 
 
 
-#' tdp 2018, appello 2, tema a, check 7
+#' tdp 2018,appello 3, tema a, check 7
 #'
 #' @param main_df [data.frame] main dataframe
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_7 <- function(main_df) {
+tdp_2018_3_a_check_7 <- function(main_df) {
   if (
     isTRUE(all.equal(
       main_df[["percentuale"]],
@@ -244,7 +244,7 @@ tdp_2018_2_a_check_7 <- function(main_df) {
         `[[`("percentuale") %>%
         `[`(. > 0)
     )
-  )){
+    )) {
     message('Il risultato sembra corretto.\n')
     return(invisible(2L))
   } else {
@@ -260,16 +260,16 @@ tdp_2018_2_a_check_7 <- function(main_df) {
 
 
 
-#' tdp 2018, appello 2, tema a, check 8
+#' tdp 2018,appello 3, tema a, check 8
 #'
 #' @param main_df [chr] main data.frame
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_8 <- function(main_df,
-                            ord_one   = 'percentuale',
-                            ord_two   = 'anno',
-                            ord_three = 'mesi'
+tdp_2018_3_a_check_8 <- function(main_df,
+  ord_one   = 'percentuale',
+  ord_two   = 'anno',
+  ord_three = 'mesi'
 ) {
   reference <- read.csv("death_ita.csv", stringsAsFactors = FALSE)[-1]
   reference[["mesi"]] <- factor(reference[["mesi"]],
@@ -300,11 +300,11 @@ tdp_2018_2_a_check_8 <- function(main_df,
   reference[['mesi']] <- as.character(reference[['mesi']])
   to_check[['mesi']]  <- as.character(to_check[['mesi']])
   if (
-    isTRUE(all.equal(reference, to_check)) &&
-    setequal(
-      levels(main_df[[ord_three]]),
-      c("neonato", "prescolare", "fanciullo")
-    )
+    isTRUE(all(reference == to_check, na.rm = TRUE)) &&
+      setequal(
+        levels(main_df[[ord_three]]),
+        c("neonato", "prescolare", "fanciullo")
+      )
   ) {
     message('Il risultato sembra essere quello corretto.\n')
     return(invisible(2L))
@@ -320,13 +320,13 @@ tdp_2018_2_a_check_8 <- function(main_df,
 
 
 
-#' tdp 2018, appello 2, tema a, check 9
+#' tdp 2018,appello 3, tema a, check 9
 #'
 #' @param main_table [matrix] the requested matrix
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_9 <- function(main_table) {
+tdp_2018_3_a_check_9 <- function(main_table) {
   if (!is.matrix(main_table)) {
     message("L'oggetto fornito sembra non essere una tabella/matrice.\n")
     return(invisible(-2L))
@@ -380,13 +380,13 @@ tdp_2018_2_a_check_9 <- function(main_table) {
 
 
 
-#' tdp 2018, appello 2, tema a, check 10
+#' tdp 2018,appello 3, tema a, check 10
 #'
 #' @param main_data A list with one or two dataframe
 #'
 #' @return logical (invisibly)
 #' @export
-tdp_2018_2_a_check_10 <- function(main_data) {
+tdp_2018_3_a_check_10 <- function(main_data) {
   df_requested <- c('top_fan_2000', 'top_fan_2016')
   df_ok <- purrr::map_lgl(df_requested, ~ . %in% names(main_data))
   df_provided <- df_requested[df_ok]
@@ -409,13 +409,13 @@ tdp_2018_2_a_check_10 <- function(main_data) {
       mark <- FALSE
     } else if (
       top_fan_2000[['causa_del_decesso']][1:2] ==
-      c('prematurity', 'congenitalanomalies')          &&
+        c('prematurity', 'congenitalanomalies')          &&
 
-      top_fan_2000[['percentuale']][2:3] == c(28.7, 13.5) &&
+        top_fan_2000[['percentuale']][2:3] == c(28.7, 13.5) &&
 
-      all(top_fan_2000[['anno']] == 2000)                 &&
+        all(top_fan_2000[['anno']] == 2000)                 &&
 
-      all(top_fan_2000[['mesi']] %in% c('neonato', '0-1'))
+        all(top_fan_2000[['mesi']] %in% c('neonato', '0-1'))
     ) {
       message('`top_fan_2000` sembra essere corretto.\n')
       mark <- TRUE
@@ -438,13 +438,13 @@ tdp_2018_2_a_check_10 <- function(main_data) {
       mark <- FALSE
     } else if (
       top_fan_2016[['causa_del_decesso']][1:2] ==
-      c('prematurity', 'congenitalanomalies')            &&
+        c('prematurity', 'congenitalanomalies')            &&
 
-      top_fan_2016[['percentuale']][2:3] == c(23.4, 21.7) &&
+        top_fan_2016[['percentuale']][2:3] == c(23.4, 21.7) &&
 
-      all(top_fan_2016[['anno']] == 2016)                 &&
+        all(top_fan_2016[['anno']] == 2016)                 &&
 
-      all(top_fan_2016[['mesi']]  %in% c('neonato', '0-1'))
+        all(top_fan_2016[['mesi']]  %in% c('neonato', '0-1'))
     ) {
       message('`top_fan_2016` sembra essere corretto.\n')
       mark <- TRUE

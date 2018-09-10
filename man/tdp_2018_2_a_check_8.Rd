@@ -4,8 +4,8 @@
 \alias{tdp_2018_2_a_check_8}
 \title{tdp 2018, appello 2, tema a, check 8}
 \usage{
-tdp_2018_2_a_check_8(main_df, ord_one = "percentuale", ord_two = "anno",
-  ord_three = "mesi")
+tdp_2018_2_a_check_8(main_df, ord_one = "percentuale",
+  ord_two = "anno", ord_three = "mesi")
 }
 \arguments{
 \item{main_df}{\link{chr} main data.frame}
